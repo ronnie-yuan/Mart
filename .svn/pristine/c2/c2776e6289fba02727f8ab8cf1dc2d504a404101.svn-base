@@ -1,0 +1,100 @@
+package com.Mart.web;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.Mart.po.vo.ResultInfo;
+import com.Mart.po.User;
+import com.Mart.service.MartUserService;
+import com.Mart.util.JsonUtil;
+
+
+@WebServlet("/MartUserServlet")
+public class MartUserServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private MartUserService service=new MartUserService();
+	
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//接收参数 
+		String actionName=request.getParameter("actionName");
+		//对参数进行判断,进入相对应的操作
+		//用户登录
+		if("userLogin".equals(actionName)){
+			userLogin(request,response);
+		//检查用户名是否重复	
+		}else if("checkName".equals(actionName)){
+			checkName(request,response);
+		}else if("checkEmail".equals(actionName)){
+			checkEmail(request,response);
+		}
+		else {
+			// 如果未传递actionName的值，拦截到登录页面
+			response.sendRedirect("signIn.jsp");
+		}
+	}
+	//检查email是否重复
+	private void checkEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 接收用户名
+		String uemail=request.getParameter("uemail");
+		System.out.println(uemail);
+		//调用service层的checkName方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象）
+		ResultInfo<User> resultInfo=service.checkEmail(uemail);
+		System.out.println(resultInfo);
+		//将resultInfo对象转换成json格式的字符串，响应给ajax的回调函数
+		JsonUtil.toJson(response, resultInfo);
+		
+	}
+	//检查用户名是否重复
+	private void checkName(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 接收用户名
+		String uname=request.getParameter("uname");
+		System.out.println(uname);
+		//调用service层的checkName方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象）
+		ResultInfo<User> resultInfo=service.checkName(uname);
+		//将resultInfo对象转换成json格式的字符串，响应给ajax的回调函数
+		JsonUtil.toJson(response, resultInfo);
+			
+		
+	}
+
+	//登录操作
+	private void userLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		//接收用户名和密码
+		String uname=request.getParameter("uname");
+		String upwd=request.getParameter("upwd");
+		//调用service层的userLogin方法,返回登录结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象）
+		ResultInfo<User> resultInfo=service.userLogin(uname,upwd);
+		//根据的登录的结果跳转到不同的页面
+		if(resultInfo.getCode()==1){//登录成功
+			//将用户对象存入session作用域中
+			request.getSession().setAttribute("user", resultInfo.getResult());
+			
+			//判断是否记住密码,如果是,则存cookie对象
+			String rem=request.getParameter("remember");
+			if("1".equals(rem)){
+				//存cookie对象
+				Cookie cookie=new Cookie("user",uname+"-"+upwd);
+				//设置失效时间  七天
+				cookie.setMaxAge(7*24*60*60);
+				//相应cookie对象
+				response.addCookie(cookie);
+				
+			}
+			//重定向到首页IndexServlet
+			response.sendRedirect("IndexServlet?actionName=changePage");
+			
+		}else{
+			//登录失败,并且跳转到登录页面
+			request.setAttribute("resultInfo", resultInfo);
+			request.getRequestDispatcher("signIn.jsp").forward(request, response);
+		}
+		
+		
+	}
+
+}

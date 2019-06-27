@@ -1,0 +1,19 @@
+package com.Mart.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import com.Mart.Dao.MartBackstageDao;
+
+public class TestMartBackstageDao {
+
+	MartBackstageDao martBackstageDao = new MartBackstageDao();
+	
+	@Test
+	public void testCheckIdByUserName() {
+		boolean flag = martBackstageDao.checkIdByUserName("彪", 1);
+		System.out.println(flag);
+	}
+
+}

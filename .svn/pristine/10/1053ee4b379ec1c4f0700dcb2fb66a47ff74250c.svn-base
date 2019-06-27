@@ -1,0 +1,70 @@
+package com.Mart.web;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.Mart.po.BigType;
+import com.Mart.po.vo.ResultInfo;
+import com.Mart.service.MartIndexService;
+
+/**
+ * Servlet implementation class MartIndexServlet
+ */
+@WebServlet("/MartIndexServlet")
+public class MartIndexServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private static MartIndexService martIndexService=new MartIndexService();
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取actionName属性值
+		String actionName=request.getParameter("actionName");
+		
+		//判断操作
+		if(actionName.equals("aaa")){
+			
+			
+		}else{
+			
+			//进入主页,循环出商品分类中的数据
+			selectBigType(request,response);
+			
+		}
+		
+		
+	}
+	
+	//进入主页,循环出商品分类中的数据
+	private void selectBigType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//调用MartIndexService层方法进行商品分类查询
+		ResultInfo<List<BigType>> resultInfo=martIndexService.selectBigType();
+		
+		//判断是否查询到数据
+		if(resultInfo.getCode()==0){
+			resultInfo.setResult(null);
+			resultInfo.setMsg("暂未查询到数据");
+			request.setAttribute("resultInfo", resultInfo);
+			
+			
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+			return;
+		}
+		
+		request.setAttribute("resultInfo", resultInfo);
+		
+		
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
+		
+	}
+
+}

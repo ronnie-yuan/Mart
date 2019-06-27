@@ -1,0 +1,66 @@
+package com.Mart.service;
+
+import java.util.List;
+
+import com.Mart.Dao.MartBackstageDao;
+import com.Mart.po.User;
+import com.Mart.po.vo.ResultInfo;
+
+
+/**
+ * 后台Service层(业务逻辑层)
+ * @author MSI-PC
+ *
+ */
+public class MartBackstageService {
+	
+		MartBackstageDao martBackstageDao = new MartBackstageDao();
+	/**
+	 * 
+	 * @param userName
+	 * @param userId
+	 * @return
+	 */
+	public ResultInfo<User> addOrUpdateUser(String userName, String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public ResultInfo<User> deleteUser(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/**
+	 * 查询类型集合
+	 *  1、调用Dao层的查询方法，通过当前用户ID查询用户列表，返回类型列表List<User>
+		2、判断类型列表是否为空
+			如果为空，code=0，mag=xxx，返回resultInfo对象
+			如果不为空，code=1，将集合设置到reusultInfo对象，返回resultInfo对象
+	 * @param userId
+	 * @return
+	 */
+	public ResultInfo<List<User>> searchUser(Integer userId) {
+		// 1、调用Dao层的查询方法，通过当前用户ID查询用户列表，返回类型列表List<User>
+		List<User> list =  martBackstageDao.findUserById(userId);
+		ResultInfo<List<User>> resultInfo = new ResultInfo<>();
+		// 2、判断类型列表是否为空
+		if (list == null || list.size() < 1) {
+			// 如果为空，code=0，mag=xxx，返回resultInfo对象
+			resultInfo.setCode(0);
+			resultInfo.setMsg("暂未查询到类型数据！");
+		} else {
+			// 如果不为空，code=1，将集合设置到reusultInfo对象，返回resultInfo对象
+			resultInfo.setCode(1);
+			resultInfo.setResult(list);
+		}
+		return resultInfo;
+		
+	}
+	
+	
+	
+}

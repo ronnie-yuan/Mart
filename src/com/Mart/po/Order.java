@@ -1,0 +1,201 @@
+package com.Mart.po;
+
+import java.util.Date;
+import java.util.List;
+public class Order {
+	private Integer	orderId;//订单表id主键
+	private Integer	userId;//用户表id 外键
+	private String	orderNumber;//订单编号
+	private Integer	orderStatus;//订单状态，0-已取消 10-未付款(默认) 20-已付款 40已发货 50-交易成功 60-交易关闭 
+	private String	orderPayment;//订单支付时间 	可为空
+	private String	orderSend;//订单发货时间	可为空
+	private String	orderEnd;//订单交易完成时间	可为空
+	private String	orderClose;//订单交易关闭时间	可为空
+	private String	orderCreate;//订单创建时间	可为空
+	private String	orderUpdate;//订单更新时间	可为空
+	private Integer	orderMoney;//订单总金额
+	private Integer	orderisIn;//删除订单功能修改值,1显示订单(默认)  0不显示订单
+	private List<OrderProDetails> list;//订单内商品集合
+	public Integer getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public Integer getOrderStatus() {
+		return orderStatus;
+	}
+	public void setOrderStatus(Integer orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+	public String getOrderPayment() {
+		return orderPayment;
+	}
+	public void setOrderPayment(String orderPayment) {
+		this.orderPayment = orderPayment;
+	}
+	public String getOrderSend() {
+		return orderSend;
+	}
+	public void setOrderSend(String orderSend) {
+		this.orderSend = orderSend;
+	}
+	public String getOrderEnd() {
+		return orderEnd;
+	}
+	public void setOrderEnd(String orderEnd) {
+		this.orderEnd = orderEnd;
+	}
+	public String getOrderClose() {
+		return orderClose;
+	}
+	public void setOrderClose(String orderClose) {
+		this.orderClose = orderClose;
+	}
+	public String getOrderCreate() {
+		return orderCreate;
+	}
+	public void setOrderCreate(String orderCreate) {
+		this.orderCreate = orderCreate;
+	}
+	public String getOrderUpdate() {
+		return orderUpdate;
+	}
+	public void setOrderUpdate(String orderUpdate) {
+		this.orderUpdate = orderUpdate;
+	}
+	public Integer getOrderMoney() {
+		return orderMoney;
+	}
+	public void setOrderMoney(Integer orderMoney) {
+		this.orderMoney = orderMoney;
+	}
+	public Integer getOrderisIn() {
+		return orderisIn;
+	}
+	public void setOrderisIn(Integer orderisIn) {
+		this.orderisIn = orderisIn;
+	}
+	public List<OrderProDetails> getList() {
+		return list;
+	}
+	public void setList(List<OrderProDetails> list) {
+		this.list = list;
+	}
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", userId=" + userId + ", orderNumber=" + orderNumber + ", orderStatus="
+				+ orderStatus + ", orderPayment=" + orderPayment + ", orderSend=" + orderSend + ", orderEnd=" + orderEnd
+				+ ", orderClose=" + orderClose + ", orderCreate=" + orderCreate + ", orderUpdate=" + orderUpdate
+				+ ", orderMoney=" + orderMoney + ", orderisIn=" + orderisIn + ", list=" + list + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((list == null) ? 0 : list.hashCode());
+		result = prime * result + ((orderClose == null) ? 0 : orderClose.hashCode());
+		result = prime * result + ((orderCreate == null) ? 0 : orderCreate.hashCode());
+		result = prime * result + ((orderEnd == null) ? 0 : orderEnd.hashCode());
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((orderMoney == null) ? 0 : orderMoney.hashCode());
+		result = prime * result + ((orderNumber == null) ? 0 : orderNumber.hashCode());
+		result = prime * result + ((orderPayment == null) ? 0 : orderPayment.hashCode());
+		result = prime * result + ((orderSend == null) ? 0 : orderSend.hashCode());
+		result = prime * result + ((orderStatus == null) ? 0 : orderStatus.hashCode());
+		result = prime * result + ((orderUpdate == null) ? 0 : orderUpdate.hashCode());
+		result = prime * result + ((orderisIn == null) ? 0 : orderisIn.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (list == null) {
+			if (other.list != null)
+				return false;
+		} else if (!list.equals(other.list))
+			return false;
+		if (orderClose == null) {
+			if (other.orderClose != null)
+				return false;
+		} else if (!orderClose.equals(other.orderClose))
+			return false;
+		if (orderCreate == null) {
+			if (other.orderCreate != null)
+				return false;
+		} else if (!orderCreate.equals(other.orderCreate))
+			return false;
+		if (orderEnd == null) {
+			if (other.orderEnd != null)
+				return false;
+		} else if (!orderEnd.equals(other.orderEnd))
+			return false;
+		if (orderId == null) {
+			if (other.orderId != null)
+				return false;
+		} else if (!orderId.equals(other.orderId))
+			return false;
+		if (orderMoney == null) {
+			if (other.orderMoney != null)
+				return false;
+		} else if (!orderMoney.equals(other.orderMoney))
+			return false;
+		if (orderNumber == null) {
+			if (other.orderNumber != null)
+				return false;
+		} else if (!orderNumber.equals(other.orderNumber))
+			return false;
+		if (orderPayment == null) {
+			if (other.orderPayment != null)
+				return false;
+		} else if (!orderPayment.equals(other.orderPayment))
+			return false;
+		if (orderSend == null) {
+			if (other.orderSend != null)
+				return false;
+		} else if (!orderSend.equals(other.orderSend))
+			return false;
+		if (orderStatus == null) {
+			if (other.orderStatus != null)
+				return false;
+		} else if (!orderStatus.equals(other.orderStatus))
+			return false;
+		if (orderUpdate == null) {
+			if (other.orderUpdate != null)
+				return false;
+		} else if (!orderUpdate.equals(other.orderUpdate))
+			return false;
+		if (orderisIn == null) {
+			if (other.orderisIn != null)
+				return false;
+		} else if (!orderisIn.equals(other.orderisIn))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+	
+	
+}

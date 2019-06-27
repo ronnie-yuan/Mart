@@ -1,0 +1,58 @@
+package com.Mart.web;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.Mart.po.Cart;
+import com.Mart.po.Cartproduct;
+import com.Mart.po.User;
+import com.Mart.po.vo.ResultInfo;
+import com.Mart.service.MartCarService;
+
+/**
+ * Servlet implementation class MartCarServlet
+ */
+@WebServlet("/martCarServlet")
+public class MartCarServlet extends HttpServlet {
+	MartCarService martcarservice=new MartCarService();
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//接收用户行为
+		String actionName=request.getParameter("actionName");
+		
+		//判断用户行为
+		if("list".equals(actionName)){
+			//查询用户列表
+			
+		}else{
+			
+			//查询用户列表
+			typeList(request,response);
+		}
+	}
+
+	private void typeList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1.从session作用域中获取用户ID
+		User user=(User)request.getSession().getAttribute("user");
+		Integer userId=user.getUserId();
+		//
+		ResultInfo<List<Cartproduct>> resultInfo=martcarservice.findProduct(userId);
+		
+		//3.将resultInfo对象存到request作用域中
+		request.setAttribute("resultInfo", resultInfo);
+		
+		//4.请求转发到cart.jsp
+		request.getRequestDispatcher("Cart.jsp").forward(request, response);
+	}
+
+}

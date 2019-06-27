@@ -1,0 +1,107 @@
+package com.Mart.service;
+
+import java.sql.ResultSet;
+import java.util.List;
+
+import com.Mart.Dao.MartBackstageDao;
+import com.Mart.po.User;
+import com.Mart.po.vo.ResultInfo;
+import com.Mart.util.StringUtil;
+
+
+/**
+ * 后台Service层(业务逻辑层)
+ * @author MSI-PC
+ *
+ */
+public class MartBackstageService {
+	
+		MartBackstageDao martBackstageDao = new MartBackstageDao();
+	/**
+	 * 
+	 * @param userName
+	 * @param userId
+	 * @return
+	 */
+	public ResultInfo<User> addOrUpdateUser(String userName, Integer userId) {
+		
+		ResultInfo<User> resultInfo = new ResultInfo<>();
+		
+		// 1. 判断参数是否为空
+		if(StringUtil.isEmpty(userName) || userId > 0){
+			resultInfo.setCode(0);
+			resultInfo.setMsg("参数不能为空, 请重试!");
+			return resultInfo;
+		}
+		
+		// 2. 调用Dao层, 判断用户名和用户ID是否一致, 不一致则修改失败
+		if(martBackstageDao.checkIdByUserName(userName, userId)){
+			
+		}
+		
+		return resultInfo;
+	}
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public ResultInfo<User> deleteUser(Integer userId) {
+		
+		ResultInfo<User> resultInfo = new ResultInfo<>();
+		
+		// 1、判断参数是否为空
+				if (StringUtil.isEmpty(userId + "")) {
+					resultInfo.setCode(0);
+					resultInfo.setMsg("删除失败，请重试！");
+					return resultInfo;
+				}
+		// 2. 调用Dao层, 通过userId查询是否存在用户记录, 如不存在则删除失败
+				if(martBackstageDao.findUserById(userId) == null){
+					resultInfo.setCode(0);
+					resultInfo.setMsg(" 不存在该用户, 无法删除");
+					return resultInfo;
+				}
+		
+		// 3. 如果存在该用户, 则删除该用户记录, 返回受影响的行数
+				int row = martBackstageDao.deleteUserById(userId);
+				
+	   // 4. 判断受影响的行数, 若大于则成功
+				if(row > 0){
+					resultInfo.setCode(1);
+				} else {
+					resultInfo.setCode(0);
+					resultInfo.setMsg("数据库删除失败");
+				}
+		return resultInfo;
+	}
+	/**
+	 * 查询类型集合
+	 *  1、调用Dao层的查询方法，通过当前用户ID查询用户列表，返回用户列表List<User>
+		2、判断类型列表是否为空
+			如果为空，code=0，mag=xxx，返回resultInfo对象
+			如果不为空，code=1，将集合设置到reusultInfo对象，返回resultInfo对象
+	 * @param userId
+	 * @return
+	 */
+	public ResultInfo<List<User>> searchUser(Integer userId) {
+		// 1、调用Dao层的查询方法，通过当前用户ID查询用户列表，返回用户列表List<User>
+		List<User> list =  martBackstageDao.findUserById(userId);
+		ResultInfo<List<User>> resultInfo = new ResultInfo<>();
+		// 2、判断类型列表是否为空
+		if (list == null || list.size() < 1) {
+			// 如果为空，code=0，mag=xxx，返回resultInfo对象
+			resultInfo.setCode(0);
+			resultInfo.setMsg("暂未查询到类型数据！");
+		} else {
+			// 如果不为空，code=1，将集合设置到reusultInfo对象，返回resultInfo对象
+			resultInfo.setCode(1);
+			resultInfo.setResult(list);
+		}
+		return resultInfo;
+		
+	}
+	
+	
+	
+}

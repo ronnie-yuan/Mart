@@ -1,0 +1,37 @@
+package com.Mart.Dao;
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.Mart.po.Cart;
+import com.Mart.po.Cartproduct;
+
+public class MartCarDao {
+
+
+	@SuppressWarnings("unchecked")
+	public List<Cartproduct> FindListByUserId(Integer userId) {
+		// 1.定义sql语句
+		String sql="select proImg,  proName,  proPrice,  cCount, (proPrice*cCount) 总计   from  c_user, c_cart, c_product where c_user.userId=c_cart.userId and c_cart.proId=c_product.proId and c_user.userId=?";
+		//2.设置参数集合
+		List<Object>params =new ArrayList<>();
+		params.add(userId);
+		//3.调用BaseDao的查询方法，返回类型集合
+		List<Cartproduct> list=BaseDao.queryRows(sql, params, Cartproduct.class);
+		for(int i=0;i<list.size();i++){
+			System.out.println(list.get(i));
+		}
+		return list;
+	}
+
+	
+	
+	
+	
+	 
+
+	
+
+}

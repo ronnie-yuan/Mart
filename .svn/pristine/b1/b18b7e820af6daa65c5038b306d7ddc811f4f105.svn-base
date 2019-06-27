@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+.myModal-header{
+	padding:6px 10px 6px 20px;
+	background-color:#FAEBD7;
+	border:0px;
+	height:30px;
+}
+
+.myModal-body{
+	padding:30px 40px 30px 40px;
+	background-color:#7FFFD4;
+	border-left:1px solid #007DCF;
+	border-right:1px solid #007DCF;
+}
+
+.myModal-header-font{
+	font-size:12px;
+	color:#FFFFFF;
+}
+
+.myModal-header-close{
+	color:white;
+}
+
+.myModal-select{
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	padding-right:10px;
+	background:url("../css/images/newpic/chevron-down.png") no-repeat scroll right center transparent;
+	background-position-x: 185px;
+}
+
+.myModal-input{
+	background-color:#1E253F;
+	border:1px solid #007DCF
+}
+
+.myModal-footer{
+	background-color:#CDCD00;
+	border:1px solid #007DCF;
+	border-top:none;
+	padding:0px 15px 30px 15px;
+}

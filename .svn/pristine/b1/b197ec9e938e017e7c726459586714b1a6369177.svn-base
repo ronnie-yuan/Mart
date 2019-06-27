@@ -1,0 +1,53 @@
+package com.Mart.test;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import org.junit.Test;
+
+import com.Mart.po.User;
+import com.Mart.po.vo.ResultInfo;
+import com.Mart.service.MartBackstageService;
+
+public class TestMartBackstageService {
+	
+	MartBackstageService martBackstageService = new MartBackstageService();
+	
+	User user = new User();
+	
+	@Test
+	public void testSearchUser() {
+		
+		ResultInfo<List<User>> resultInfo = martBackstageService.searchUser(2);
+		System.out.println(resultInfo);
+		System.out.println(resultInfo.getCode());
+		System.out.println(resultInfo.getMsg());
+		System.out.println(resultInfo.getResult());
+		
+	}
+	@Test
+	public void testAddOrUpdateUser(){
+		
+		
+		user.setUserName("Shirakami Fubuki");
+		user.setUserPwd("A490922h");
+		user.setUserSex(2);
+		user.setUserMail("Shirakami@gmail.com");
+		user.setUserMobile("330615218080");
+		user.setUserHead("http://img2.imgtn.bdimg.com/it/u=626158890,4048352046&fm=26&gp=0.jpg");
+		user.setUserBalance(5000);
+		user.setUserStatus(1);
+		user.setUserCreateTime(null);
+		user.setUserAnswer("不是, 是猫");
+		user.setUserQuestion("你是狐狸吗?");
+		
+		ResultInfo<User> resultInfo = martBackstageService.addOrUpdateUser(user);
+		System.out.println(resultInfo);
+		System.out.println(resultInfo.getCode());
+		System.out.println(resultInfo.getMsg());
+		System.out.println(resultInfo.getResult());
+		
+	}
+
+}

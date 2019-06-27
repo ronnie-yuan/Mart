@@ -1,0 +1,29 @@
+package com.Mart.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.Mart.Dao.MartIndexDao;
+import com.Mart.po.BigType;
+import com.Mart.po.vo.ResultInfo;
+import com.Mart.util.StringUtil;
+
+
+
+public class MartIndexService {
+	private static MartIndexDao dao=new MartIndexDao();
+	
+	//进入主页,循环出商品分类中的数据
+	public ResultInfo<List<BigType>> selectBigType() {
+		List<BigType> list= new ArrayList();
+		list = dao.selectBigType();
+		ResultInfo<List<BigType>> resultInfo=new ResultInfo();
+		if(list == null){
+			resultInfo.setCode(0);
+			return resultInfo;
+		}
+		resultInfo.setCode(1);
+		resultInfo.setResult(list);
+		return resultInfo;
+	}
+}

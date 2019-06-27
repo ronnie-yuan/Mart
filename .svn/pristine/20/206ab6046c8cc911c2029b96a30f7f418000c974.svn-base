@@ -1,0 +1,30 @@
+package com.Mart.service;
+
+
+
+import java.util.List;
+
+import com.Mart.Dao.MartCarDao;
+import com.Mart.po.Cart;
+import com.Mart.po.Cartproduct;
+import com.Mart.po.vo.ResultInfo;
+
+public class MartCarService {
+	private MartCarDao martcarDao=new MartCarDao();
+
+	
+
+	public ResultInfo<List<Cartproduct>> findProduct(Integer userId) {
+		//
+		List<Cartproduct>list=martcarDao.FindListByUserId(userId);
+		ResultInfo<List<Cartproduct>>resultInfo=new ResultInfo<>();
+		if(list==null||list.size()<1){
+			resultInfo.setCode(0);
+			resultInfo.setMsg("购物车中无商品");
+		}else{
+			resultInfo.setCode(1);
+			resultInfo.setResult(list);
+		}
+		return resultInfo;
+	}
+}

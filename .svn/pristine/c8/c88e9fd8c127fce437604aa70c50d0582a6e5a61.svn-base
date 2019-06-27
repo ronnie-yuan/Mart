@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+.modal-header{
+	padding:6px 10px 6px 20px;
+	background-color:#FAEBD7;
+	border:0px;
+	height:30px;
+	text-align:center;
+}
+
+.modal-body{
+	padding:30px 40px 30px 40px;
+	background-color:#7FFFD4;
+}
+
+.modal-header-font{
+	font-size:12px;
+	color:#FFFFFF;
+}
+
+.modal-header-close{
+	color:white;
+}
+
+
+.modal-input{
+	background-color:#1E253F;
+	border:1px solid #007DCF
+}
+
+.modal-footer{
+	background-color:#CDCD00;
+	border:1px solid #007DCF;
+	border-top:none;
+	padding:0px 15px 30px 15px;
+}

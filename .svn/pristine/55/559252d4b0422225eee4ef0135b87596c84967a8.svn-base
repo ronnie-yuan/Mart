@@ -1,0 +1,284 @@
+package com.Mart.Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.Mart.Dao.BaseDao;
+import com.Mart.po.User;
+import com.Mart.util.DBUtil;
+
+/**
+ * 后台Dao层
+ * @author MSI-PC
+ *
+ */
+public class MartBackstageDao {
+	/**
+	 * 通过用户名查找用户信息
+	 * @param uname
+	 * @return
+	 */
+	public User findUserByName(String uname) {
+		User user = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			// 1、得到数据库连接
+			connection = DBUtil.getConnection();
+			// 2、准备SQL语句
+			String sql = "select * from c_user where userName = ?";
+			
+			// 3、预编译
+			preparedStatement = connection.prepareStatement(sql);
+			// 4、设置参数，下标从1开始
+			preparedStatement.setString(1, uname);
+			
+			// 5、执行查询，返回结果集
+			resultSet = preparedStatement.executeQuery();
+			// 6、判断并分析结果集，得到user对象
+			if (resultSet.next()) {
+				user = new User();
+				user.setUserId(resultSet.getInt("userId"));
+				user.setUserName(uname);
+				user.setUserPwd(resultSet.getString("userPwd"));
+				user.setUserSex(resultSet.getInt("userSex"));
+				user.setUserMobile(resultSet.getString("userMobile"));
+				user.setUserHead(resultSet.getString("userHead"));
+				user.setUserBalance(resultSet.getInt("userBalance"));
+				user.setUserStatus(resultSet.getInt("userStatus"));
+				user.setUserCreateTime(resultSet.getString("userCreateTime"));
+				user.setUserAnswer(resultSet.getString("userAnswer"));
+				user.setUserQuestion(resultSet.getString("userQuestion"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 关闭资源
+			DBUtil.close(connection, preparedStatement, resultSet);
+		}
+		return user;
+	}
+	
+	@SuppressWarnings("null")
+	public List<User> findUserById(Integer id){
+		User user = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<User> list = null;
+		
+		try {
+			// 1、得到数据库连接
+			connection = DBUtil.getConnection();
+			// 2、准备SQL语句
+			String sql = "select * from c_user where userId = ?";
+			
+			// 3、预编译
+			preparedStatement = connection.prepareStatement(sql);
+			// 4、设置参数，下标从1开始
+			preparedStatement.setInt(1, id);
+			
+			// 5、执行查询，返回结果集
+			resultSet = preparedStatement.executeQuery();
+			// 6、判断并分析结果集，得到user对象
+			if (resultSet.next()) {
+				user = new User();
+				user.setUserId(id);
+				user.setUserName(resultSet.getString("userName"));
+				user.setUserPwd(resultSet.getString("userPwd"));
+				user.setUserSex(resultSet.getInt("userSex"));
+				user.setUserMobile(resultSet.getString("userMobile"));
+				user.setUserHead(resultSet.getString("userHead"));
+				user.setUserBalance(resultSet.getInt("userBalance"));
+				user.setUserStatus(resultSet.getInt("userStatus"));
+				user.setUserCreateTime(resultSet.getString("userCreateTime"));
+				user.setUserAnswer(resultSet.getString("userAnswer"));
+				user.setUserQuestion(resultSet.getString("userQuestion"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 关闭资源
+			DBUtil.close(connection, preparedStatement, resultSet);
+		}
+		
+		list.add(user);
+		return list;
+	}
+	
+	/**
+	 * 通过用户id修改用户信息
+	 * @param user
+	 * @return
+	 */
+	public int updateInfo(User user){
+		// 定义sql语句
+		String sql = "update c_user set userName = ?, userPwd = ?, userSex = ?, userMail = ?, userMobile = ?, userHead = ?, userBalance = ?, userStatus = ?, userCreateTime = ?, userQuestion = ?, userAnswer = ? where userId = ?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(user.getUserName());
+		params.add(user.getUserPwd());
+		params.add(user.getUserSex());
+		params.add(user.getUserMail());
+		params.add(user.getUserMobile());
+		params.add(user.getUserHead());
+		params.add(user.getUserBalance());
+		params.add(user.getUserStatus());
+		params.add(user.getUserCreateTime());
+		params.add(user.getUserQuestion());
+		params.add(user.getUserAnswer());
+		params.add(user.getUserId());
+		
+		// 调用BaseDao更新方法
+		int row = BaseDao.executeUpdate(sql, params);
+		return row;
+	}
+	
+	public int updateInfoByName(User user){
+		// 定义sql语句
+		String sql = "update c_user set userId = ?, userPwd = ?, userSex = ?, userMail = ?, userMobile = ?, userHead = ?, userBalance = ?, userStatus = ?, userCreateTime = ?, userQuestion = ?, userAnswer = ? where userName = ?";
+		
+		List<Object> params = new ArrayList<Object>();
+		params.add(user.getUserId());
+		params.add(user.getUserPwd());
+		params.add(user.getUserSex());
+		params.add(user.getUserMail());
+		params.add(user.getUserMobile());
+		params.add(user.getUserHead());
+		params.add(user.getUserBalance());
+		params.add(user.getUserStatus());
+		params.add(user.getUserCreateTime());
+		params.add(user.getUserQuestion());
+		params.add(user.getUserAnswer());
+		params.add(user.getUserName());
+		
+		// 调用BaseDao更新方法
+		int row = BaseDao.executeUpdate(sql, params);
+		return row;
+	}
+	
+	public int insertUser(User user){
+		// 定义sql语句
+		String sql = "insert into c_user (userName, userPwd, userSex, userMail, userMobile, userHead, userBalance, userStatus, userCreateTime, userAnswer, userQuestion) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		List<Object> params = new ArrayList<Object>();
+		
+		params.add(user.getUserName());
+		params.add(user.getUserPwd());
+		params.add(user.getUserSex());
+		params.add(user.getUserMail());
+		params.add(user.getUserMobile());
+		params.add(user.getUserHead());
+		params.add(user.getUserBalance());
+		params.add(user.getUserStatus());
+		params.add(user.getUserCreateTime());
+		params.add(user.getUserAnswer());
+		params.add(user.getUserQuestion());
+		
+		
+		// 调用BaseDao更新方法
+		int row = BaseDao.executeUpdate(sql, params);
+		return row;
+	}
+	/**
+	 *  根据用户名删除
+	 * @param uname
+	 * @return
+	 */
+	public int deleteUserByName(String uname) {
+		int row = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+	
+		
+		try {
+			// 1、得到数据库连接
+			connection = DBUtil.getConnection();
+			// 2、准备SQL语句
+			String sql = "delete from c_user where userName = ?";
+			
+			// 3、预编译
+			preparedStatement = connection.prepareStatement(sql);
+			// 4、设置参数，下标从1开始
+			preparedStatement.setString(1, uname);
+			
+			// 5、执行查询，返回结果集
+			row = preparedStatement.executeUpdate();
+		
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 关闭资源
+			DBUtil.close(connection, preparedStatement, null);
+		}
+		return row;
+	}
+	
+	/**
+	 * 根据用户id删除
+	 * @param id
+	 * @return
+	 */
+	public int deleteUserById(Integer id){
+		int row = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		
+		try {
+			// 1、得到数据库连接
+			connection = DBUtil.getConnection();
+			// 2、准备SQL语句
+			String sql = "delete from c_user where userId = ?";
+			
+			// 3、预编译
+			preparedStatement = connection.prepareStatement(sql);
+			// 4、设置参数，下标从1开始
+			preparedStatement.setInt(1, id);
+			
+			// 5、执行查询，返回结果集
+			row = preparedStatement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 关闭资源
+			DBUtil.close(connection, preparedStatement, null);
+		}
+		return row;
+	}
+	/**
+	 * 防止删除后用户id乱序, 配合删除使用
+	 * @return
+	 */
+	public int avoidMessAfterDelete(){
+		int row = 0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		try{
+			// 建立连接
+			connection = DBUtil.getConnection();
+			
+			// 准备sql语句
+			String sql = "alter table c_user auto_increment = 1";
+			
+			// 预处理
+			preparedStatement = connection.prepareStatement(sql);
+			
+			row = preparedStatement.executeUpdate();
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(connection, preparedStatement, null);
+		}
+		
+		return row;
+	}
+}

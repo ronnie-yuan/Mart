@@ -1,0 +1,5 @@
+package com.Mart.Dao;
+
+public class MartIndexDao {
+	private static BaseDao dao=new BaseDao(); 
+}

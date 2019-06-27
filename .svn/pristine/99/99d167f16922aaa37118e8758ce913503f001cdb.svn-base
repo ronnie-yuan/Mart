@@ -1,0 +1,7 @@
+package com.Mart.service;
+
+import com.Mart.Dao.MartIndexDao;
+
+public class MartIndexService {
+	private static MartIndexDao dao=new MartIndexDao();
+}

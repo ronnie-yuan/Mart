@@ -1,0 +1,4 @@
+jdbcName=com.mysql.jdbc.Driver
+dbUrl=jdbc:mysql://localhost:3306/computershopping?useUnicode=true&characterEncoding=UTF-8
+dbName=root
+dbPwd=123456

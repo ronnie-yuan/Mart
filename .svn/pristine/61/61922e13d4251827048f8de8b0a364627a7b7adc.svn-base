@@ -1,0 +1,75 @@
+//给姓名文本框绑定失焦,聚焦事件
+$("#name").blur(function(){
+	console.log("哈哈哈");
+	//得到姓名并判断是否为空
+	var uname=$("#name").val();
+			
+	if(isEmpty(uname)){
+		$("#msg").html("用户名不得为空!!");
+		//如果为空,禁用提交按钮
+		$("#but").prop("disabled",true);
+			return;
+		}
+		//发送ajax请求,判断姓名是否已经在数据库中!
+	
+	$.ajax({
+		type:"get",
+		url:"MartUserServlet",
+		data:{
+			actionName:"checkName",
+			uname:uname
+		},
+		success:function(result){
+			//成功返回一个code=1
+		console.log("00000000");
+			if(result.code==1){
+				$("#msg").html(result.msg);
+				// 禁用按钮
+				$("#btn").prop("disabled",true);
+			}
+		}
+	});
+}).focus(function(){
+	// 1、清空提示信息
+	$("#msg").html("");
+	//	2、按钮可用
+	$("#btn").prop("disabled",false);
+})
+
+//给email文本框绑定失焦,聚焦事件
+$("#email").blur(function(){
+	//得到email并判断是否为空
+	var uemail=$("#email").val();
+			
+	if(isEmpty(uemail)){
+		$("#msg").html("email不得为空!!");
+		//如果为空,禁用提交按钮
+		$("#but").prop("disabled",true);
+		return;
+	}
+	//发送ajax请求,判断email是否已经在数据库中!
+	$.ajax({
+		type:"get",
+		url:"MartUserServlet",
+		data:{
+			actionName:"checkEmail",
+			uemail:uemail
+		},
+		success:function(result){
+			//成功返回一个code=1
+			if(result.code==1){
+				$("#msg").html(result.msg);
+				// 禁用按钮
+				$("#btn").prop("disabled",true);
+			}
+		}
+	});
+}).focus(function(){
+	// 1、清空提示信息
+	$("#msg").html("");
+	//	2、按钮可用
+	$("#btn").prop("disabled",false);
+	 
+}) 
+//
+

@@ -1,0 +1,48 @@
+package com.Mart.web;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class IndexServlet
+ */
+@WebServlet("/IndexServlet")
+public class IndexServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String actionName = request.getParameter("actionName");
+		//判断操作
+		if(actionName.equals("changePage")){
+			
+			//进入动态包含页面
+			IndexChangePage(request,response);
+		}else if(actionName.equals("houtai")){
+			
+			//进入后台页面
+			HouTai(request,response);
+		}
+	}
+
+	private void HouTai(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		response.sendRedirect("martBackstageServlet");
+	}
+
+	private void IndexChangePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取前台传来的changePage属性值
+		String changePage= request.getParameter("changePage");
+		// 设置首页动态包含的页面值
+		request.setAttribute("changePage", changePage);
+		// 跳转到index.jsp
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+
+}

@@ -1,0 +1,18 @@
+package com.Mart.Dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.Mart.po.BigType;
+
+public class MartIndexDao {
+	private static BaseDao dao=new BaseDao();
+	
+	//进入主页,循环出商品分类中的数据
+	public List<BigType> selectBigType() {
+		List params=new ArrayList<>();
+		String sql="select * from c_bigtype b order by b.bigId";
+		List<BigType> list=dao.queryRows(sql, params, BigType.class);
+		return list;
+	} 
+}

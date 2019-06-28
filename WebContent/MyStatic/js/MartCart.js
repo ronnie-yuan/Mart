@@ -44,3 +44,10 @@ function singleClick(id){
 	})
 }
 
+//检测当前用户金额是否足够支持
+function TextOncl(){
+	
+	window.location.href="IndexServlet?actionName=houtai"; 
+	
+}
+

@@ -26,11 +26,22 @@ public class IndexServlet extends HttpServlet {
 			
 			//进入动态包含页面
 			IndexChangePage(request,response);
-		}else if(actionName.equals("houtai")){
+		}else if(actionName.equals("zhuxiao")){
+			
+			//登出当前账号
+			zhuxiao(request,response);
+		}
+		else if(actionName.equals("houtai")){
 			
 			//进入后台页面
 			HouTai(request,response);
 		}
+	}
+
+	private void zhuxiao(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		request.getSession().setAttribute("user", null);
+		response.sendRedirect("signln.jsp");
+		
 	}
 
 	private void HouTai(HttpServletRequest request, HttpServletResponse response) throws IOException {

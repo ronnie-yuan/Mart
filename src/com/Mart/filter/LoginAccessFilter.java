@@ -93,6 +93,7 @@ public class LoginAccessFilter implements Filter {
 		}
 		
 		
+		
 		// 3、指定操作，放行 （登录操作、注册操作等；不需要登录即可执行执行的操作）
 		// 得到用户行为
 		String actionName = request.getParameter("actionName");

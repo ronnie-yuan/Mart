@@ -78,8 +78,8 @@
                                     <li><a href="IndexServlet?actionName=changePage&changePage=MartWishlist/wishlist.jsp"><span>心愿单</span></a></li>
                                     <li><a href="IndexServlet?actionName=changePage&changePage=compare.jsp"><span>商品对比</span></a></li>
                                     <li><a href="MartUserServlet?actionName=gouPersonalCenter"><span>个人中心</span></a></li>
-                                    <li><a href="IndexServlet?actionName=houtai"><span>后台系统</span></a></li>
-                                    <li><a href="signIn.jsp"><span>登录注册</span></a></li>
+                                    <li><a href="javascript:void(0);" onclick="gouhoutai()"><span>后台系统</span></a></li>
+                                    <li><a href="javascript:void(0);" onclick="zhuxiao()"><span>登出</span></a></li>
                                 </ul>
                             </li>
                             <li><a href="IndexServlet?actionName=changePage&changePage=contact.jsp">联系我们</a></li>
@@ -240,8 +240,27 @@
 
     <!-- Main JS -->
     <script src="OneStatic/assets/js/main.js"></script>
-
+	
 </body>
+<script type="text/javascript">
+function gouhoutai(){
+	var res = confirm("请慎入,非超级SVIP七钻全开月入百万不可进");
+
+    if(res == true){
+
+    	window.location.href="IndexServlet?actionName=houtai"; 
+		
+     }
+}
+function zhuxiao(){
+	var res = confirm("确定要退出当前账号么?");
+	
+	if(res == true){
+		window.location.href="IndexServlet?actionName=zhuxiao";
+	}
+	
+}
+</script>
 
 </html>
 

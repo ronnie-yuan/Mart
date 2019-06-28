@@ -122,6 +122,7 @@
                                         
                                     </div>
                                     <div class="cart-summary-button">
+                                    	<button type="button" onclick="TextOncl()">测试</button>
                                         <button type="button" class="checkout-btn"  onclick="cartaaaCheckout()">结算</button>
                                         <button class="update-btn">Update Cart</button>
                                     </div>
@@ -426,6 +427,23 @@ function cartaaaCheckout(){
 		alert("亲爱的用户~请至少选择一个商品购买");
 		return;
 	}
+	
+	$.ajax({
+		type:"post",
+		url:"MartIndexServlet",
+		data:{
+			actionName:"delectUserMoney"
+		},
+		success:function(result){
+			result = 0;
+			if(result == 0){
+				alert("抱歉,亲爱的用户,你当前余额不足够支付目前订单,请进行充值.(应放在提交订单后在支付宝页面点击付款按钮判断)");
+				return;
+			}
+		}
+		
+		
+	})
 	
 	$("#loginform").submit();
 	

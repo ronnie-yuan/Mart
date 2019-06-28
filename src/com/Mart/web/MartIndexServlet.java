@@ -66,6 +66,10 @@ public class MartIndexServlet extends HttpServlet {
 			
 			//购物车页面 单选事件
 			singleClick(request,response);
+		}else if(actionName.equals("delectUserMoney")){
+			
+			//查询当前用户余额
+			delectUserMoney(request,response);
 		}
 		else{
 			
@@ -76,6 +80,37 @@ public class MartIndexServlet extends HttpServlet {
 		
 	}
 	
+	//查询当前用户余额
+	private void delectUserMoney(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		//获取当前登录用户状态id
+		User user=(User) request.getSession().getAttribute("user");
+		Integer userId=user.getUserId();
+		
+		//查询当前用户的所有余额
+		Integer rserMo=user.getUserBalance();
+		System.out.println("钱有:"+rserMo);
+		
+		//查询当前用户购物车选中状态的商品金额
+		//判断当前购物车中是否有选中的商品
+		Integer mo=0;
+		int sizeee=martIndexService.selectProCheck(userId);
+		
+		if(sizeee == 1){
+			mo=(martIndexService.selectAllCkmMo(userId)).intValue();
+		}
+		
+		PrintWriter out =response.getWriter();
+		
+		
+		if((rserMo - mo) < 0){
+			out.write(0+"");
+			return ;
+		}
+		out.write(1+"");
+		
+	}
+
 	//购物车页面 单选事件
 	private void singleClick(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//获取当前登录用户状态id

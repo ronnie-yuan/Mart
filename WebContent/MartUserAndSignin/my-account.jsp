@@ -60,7 +60,7 @@
                                     <div class="panel-heading">
                                         <h5 class="panel-title">
                                             <span>1</span>
-                                            <a data-toggle="collapse" data-parent="#faq" href="#my-account-1">Edit your
+                                            <a data-toggle="collapse" data-parent="#faq" href="#my-account-1">Edit my
                                                 account information </a>
                                         </h5>
                                     </div>
@@ -68,49 +68,62 @@
                                         <div class="panel-body">
                                             <div class="billing-information-wrapper">
                                                 <div class="account-info-wrapper">
-                                                    <h4>My Account Information</h4>
-                                                    <h5>Your Personal Details</h5>
+                                                    <h4>My Account Information(我的账户信息)</h4>
+                                                    <h5>My Personal Details(个人资料)</h5>
                                                 </div>
                                                 <div class="row">
+                                                	<label for="img" class="col-sm-2 control-label">head(头像):</label>
+												    <div class="col-sm-5">
+												    	
+												    	<span><img alt="www.baidu.com" src="${user.userHead }" id="img1" width="40px" height="40px"></span> 
+												    </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
-                                                            <label>First Name</label>
-                                                            <input type="text">
+                                                            <label>Name(用户名)</label>
+                                                            <input type="text" id="uname" name="uname" readonly="readonly" value="${user.userName }">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
-                                                            <label>Last Name</label>
-                                                            <input type="text">
+                                                            <label>Sex(性别)</label>
+                                                            <input type="text" id="usex" name="usex" value="${user.userSex }"> 
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
-                                                            <label>Email Address</label>
-                                                            <input type="email">
+                                                            <label>Email Address(邮箱地址)</label>
+                                                            <input type="email" id="uemail" name="uemail" value="${user.userMail }">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
-                                                            <label>Telephone</label>
-                                                            <input type="text">
+                                                            <label>Telephone(电话)</label>
+                                                            <input type="text" id="uphone" name="uphone" readonly="readonly" value="${user.userMobile }"> 
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
-                                                            <label>Fax</label>
-                                                            <input type="text">
+                                                            <label>Status(状态)</label>
+                                                            <input type="text" id="ustatus" name="ustatus" readonly="readonly" value="${user.userStatus }">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <div class="billing-info">
+                                                            <label>Balance(用户金额)</label>
+                                                            <input type="text" id="ubalance" name="ubalance" readonly="readonly" value="${user.userBalance }">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="billing-back-btn">
                                                     <div class="billing-back">
                                                         <a href="#">
-                                                            <i class="fa fa-long-arrow-up"></i> back</a>
+                                                            <i class="fa fa-long-arrow-up"></i> back(回到顶部)</a>
                                                     </div>
+                                                    <span style="font-size: 16px;color:red" id="msg3"></span>
                                                     <div class="billing-btn">
-                                                        <button type="submit">Continue</button>
-                                                    </div>
+                                                    	<input id="but001" type="button" value="Preserve(保存)" class="btn btn-info">
+                                                    	
+                                                    </div>                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +134,7 @@
                                         <h5 class="panel-title">
                                             <span>2</span>
                                             <a data-toggle="collapse" data-parent="#faq" href="#my-account-2">Change
-                                                your password </a>
+                                                My password(修改密码) </a>
                                         </h5>
                                     </div>
                                     <div id="my-account-2" class="panel-collapse collapse">
@@ -129,19 +142,25 @@
                                             <div class="billing-information-wrapper">
                                                 <div class="account-info-wrapper">
                                                     <h4>Change Password</h4>
-                                                    <h5>Your Password</h5>
+                                                    <h5>My Password</h5>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-lg-12 col-md-12">
+                                                	<div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
-                                                            <label>Password</label>
-                                                            <input type="password">
+                                                            <label>The old password(旧密码)</label>
+                                                            <input type="password" id="password03" name="password3">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <div class="billing-info">
-                                                            <label>Password Confirm</label>
-                                                            <input type="password">
+                                                            <label>Password(密码)</label>
+                                                            <input type="password" id="password01" name="password">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="billing-info">
+                                                            <label>Password Confirm(确认密码)</label>
+                                                            <input type="password" id="password02" name="password02">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -150,8 +169,9 @@
                                                         <a href="#">
                                                             <i class="fa fa-long-arrow-up"></i> back</a>
                                                     </div>
+                                                    <span style="font-size: 16px;color:red" id="msg4"></span>
                                                     <div class="billing-btn">
-                                                        <button type="submit">Continue</button>
+                                                        <input id="but002" type="button" value="Preserve(保存)" class="btn btn-info">
                                                     </div>
                                                 </div>
                                             </div>
@@ -162,53 +182,61 @@
                                     <div class="panel-heading">
                                         <h5 class="panel-title">
                                             <span>3</span>
-                                            <a data-toggle="collapse" data-parent="#faq" href="#my-account-3">Modify
-                                                your address book entries </a>
+                                            <a data-toggle="collapse" data-parent="#faq" href="#my-account-3">
+                                                My order(我的订单) </a>
                                         </h5>
                                     </div>
                                     <div id="my-account-3" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <div class="billing-information-wrapper">
                                                 <div class="account-info-wrapper">
-                                                    <h4>Address Book Entries</h4>
+                                                    <h4>我的订单</h4>
                                                 </div>
                                                 <div class="entries-wrapper">
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center justify-content-center">
-                                                            <div class="entries-info text-center">
-                                                                <p>Gerald Armstrong </p>
-                                                                <p> Address will go here. </p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center justify-content-center">
-                                                            <div class="entries-edit-delete text-center">
-                                                                <a class="edit" href="#">Edit</a>
-                                                                <a href="#">Delete</a>
-                                                            </div>
-                                                        </div>
+                                                    	<div class="col-lg-12 col-12 d-flex align-items-center justify-content-center">
+                                                    		<!-- 判断数据是否存在，不存在显示提示信息 -->
+                                                            <c:if test="${empty checkOrderCenter}">
+                                                            	<h2>${checkOrderCenter.msg }</h2>
+                                                            </c:if>
+                                                            <!-- 判断数据时候否存在，存在显示订单列表 -->
+                                                            <c:if test="${!empty checkOrderCenter }">
+	                                                            <table>	
+	                                                            	<tr>
+																		<th>订单号</th>
+																		<th>订单编号</th>
+																		<th>订单状态</th>
+																		<th>订单创建时间</th>
+																		<th>订单更新时间</th>
+																		<th>订单支付时间</th>
+																		<th>订单总金额</th>
+																	</tr>
+																	<c:forEach items="${OrderList }" var="Order">
+																	<tr >
+																		<td >${Order.orderId }</td>
+																		<td>${Order.orderNumber }</td>
+																		<td>${Order.orderStatus }</td>
+																		<td>${Order.orderCreate }</td>
+																		<td>${Order.orderUpdate }</td>
+																		<td>${Order.orderPayment }</td>
+																		<td>${Order.orderMoney }</td>
+																		<td><button class="btn btn-info"  id="c${Order.orderId}" onclick="openMoTai(${Order.orderId })"  >查看</button></td>
+                                                                		<td><button class="btn btn-info"  id="d${Order.orderId}" onclick="deleteOrder(${Order.orderId })" >删除</button></td>
+																		
+																	</tr>
+																	</c:forEach>
+																</table>	
+                                                            </c:if>
+                                                    	</div>
+                                                        
                                                     </div>
                                                 </div>
-                                                <div class="billing-back-btn">
-                                                    <div class="billing-back">
-                                                        <a href="#">
-                                                            <i class="fa fa-long-arrow-up"></i> back</a>
-                                                    </div>
-                                                    <div class="billing-btn">
-                                                        <button type="submit">Continue</button>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h5 class="panel-title">
-                                            <span>4</span>
-                                            <a href="wishlist.jsp">Modify your wish list </a>
-                                        </h5>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -217,269 +245,34 @@
         </div>
         <!-- End My Account Area -->
     </div>
-
-    <!-- Quick View Modal -->
-    <div class="quick-view-modal">
-        <div class="quick-view-modal-inner">
-            <div class="container">
-                <div class="product-details">
-                    <!-- Product Details Left -->
-                    <div class="product-details-left">
-                        <div class="product-details-images slider-navigation-2">
-                            <a href="#">
-                                <img class="w-100" src="OneStatic/assets/images/product/product-01.jpg" alt="product image">
-                            </a>
-                            <a href="#">
-                                <img class="w-100" src="OneStatic/assets/images/product/product-02.jpg" alt="product image">
-                            </a>
-                            <a href="#">
-                                <img class="w-100" src="OneStatic/assets/images/product/product-03.jpg" alt="product image">
-                            </a>
-                            <a href="#">
-                                <img class="w-100" src="OneStatic/assets/images/product/product-04.jpg" alt="product image">
-                            </a>
-                            <a href="#">
-                                <img class="w-100" src="OneStatic/assets/images/product/product-05.jpg" alt="product image">
-                            </a>
-                        </div>
-                        <div class="product-details-thumbs slider-navigation-2">
-                            <img src="OneStatic/assets/images/product/product-01.jpg" alt="product image thumb">
-                            <img src="OneStatic/assets/images/product/product-02.jpg" alt="product image thumb">
-                            <img src="OneStatic/assets/images/product/product-03.jpg" alt="product image thumb">
-                            <img src="OneStatic/assets/images/product/product-04.jpg" alt="product image thumb">
-                            <img src="OneStatic/assets/images/product/product-05.jpg" alt="product image thumb">
-                        </div>
-                    </div>
-                    <!--// Product Details Left -->
-
-                    <!-- Product Details Right -->
-                    <div class="product-details-right">
-                        <h5 class="product-title">Demo Product Name</h5>
-
-                        <div class="ratting-stock-availbility">
-                            <div class="ratting-box">
-                                <span><i class="fa fa-star"></i></span>
-                                <span><i class="fa fa-star"></i></span>
-                                <span><i class="fa fa-star"></i></span>
-                                <span><i class="fa fa-star"></i></span>
-                                <span><i class="fa fa-star"></i></span>
-                            </div>
-                            <span class="stock-available">In stock</span>
-                        </div>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est
-                            tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis
-                            justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
-                            nulla. adipiscing cursus eu, suscipit id nulla.</p>
-
-                        <div class="price-box">
-                            <span class="pricebox-price">£80.00</span>
-                        </div>
-
-                        <div class="product-details-quantity">
-                            <div class="quantity-select">
-                                <div class="pro-quantity">
-                                    <div class="pro-qty"><input type="text" value="1"></div>
-                                </div>
-                            </div>
-                            <a href="#" class="add-to-cart-button">
-                                <span>ADD TO CART</span>
-                            </a>
-                        </div>
-
-                        <div class="product-details-color">
-                            <span>Color :</span>
-                            <ul>
-                                <li class="red"><span></span></li>
-                                <li class="green checked"><span></span></li>
-                                <li class="blue"><span></span></li>
-                                <li class="black"><span></span></li>
-                            </ul>
-                        </div>
-
-                        <div class="product-details-size">
-                            <span>Size :</span>
-                            <ul>
-                                <li class="checked"><span>S</span></li>
-                                <li><span>M</span></li>
-                                <li><span>L</span></li>
-                                <li><span>XL</span></li>
-                                <li><span>XXL</span></li>
-                            </ul>
-                        </div>
-
-                        <div class="product-details-categories">
-                            <span>Categories :</span>
-                            <ul>
-                                <li><a href="shop.jsp">Accessories</a></li>
-                                <li><a href="shop.jsp">Kids</a></li>
-                                <li><a href="shop.jsp">Women</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="product-details-tags">
-                            <span>Tags :</span>
-                            <ul>
-                                <li><a href="shop.jsp">Electronic</a></li>
-                                <li><a href="shop.jsp">Television</a></li>
-                            </ul>
-                        </div>
-
-                        <div class="product-details-socialshare">
-                            <span>Share :</span>
-                            <ul>
-                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--// Product Details Right -->
-
-                </div>
-            </div>
-        </div>
-        <button class="close-quickview-modal"><i class="fa fa-close"></i></button>
-    </div>
-    <!--// Quick View Modal -->
-    <!-- Start Footer Area -->
-    <footer class="footer-area bg-color plr--100 plr_lg--40 plr_md--30 plr_sm--30 clearfix" data-bg-color="#f4f8fa">
-        <!-- Start Footer Top -->
-        <div class="footer-top ptb--80">
-            <div class="row">
-                <div class="col-custom--5">
-                    <div class="footer-widget">
-                        <div class="logo">
-                            <a href="index.jsp">
-                                <img src="OneStatic/assets/images/logo/logo-black.png" alt="Logo">
-                            </a>
-                        </div>
-                        <div class="inner">
-                            <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms. </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-custom--5 mt_mobile--40">
-                    <div class="footer-widget">
-                        <h5 class="title">Company</h5>
-                        <div class="inner">
-                            <ul class="ft-link">
-                                <li><a href="#">About US</a></li>
-                                <li><a href="#">Blogs</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-custom--5 mt_md--40 mt_sm--40">
-                    <div class="footer-widget">
-                        <h5 class="title">Product</h5>
-                        <div class="inner">
-                            <ul class="ft-link">
-                                <li><a href="#">Pricing</a></li>
-                                <li><a href="#">Features</a></li>
-                                <li><a href="#">Customers</a></li>
-                                <li><a href="#">Demos</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-custom--5 mt_md--40 mt_sm--40">
-                    <div class="footer-widget">
-                        <h5 class="title">Helps</h5>
-                        <div class="inner">
-                            <ul class="ft-link">
-                                <li><a href="#">Introduction</a></li>
-                                <li><a href="#">Feedback</a></li>
-                                <li><a href="#">Referrals</a></li>
-                                <li><a href="#">Network Status</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-custom--5 mt_md--40 mt_sm--40">
-                    <div class="footer-widget">
-                        <h5 class="title">Social Netowrk</h5>
-                        <div class="inner">
-                            <ul class="ft-link">
-                                <li><a href="#">Facebook</a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Linkedin</a></li>
-                                <li><a href="#">Google +</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Footer Top -->
-        <!-- Start Footer Middle -->
-        <div class="footer-middle">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-middle-inner ptb--45 text-center">
-                            <div class="tags-list">
-                                <span>Tags :</span>
-                                <div class="tags">
-                                    <a href="#">Minimal eCommerce</a>
-                                    <a href="#">Marketing</a>
-                                    <a href="#">User Exprience</a>
-                                    <a href="#">Ali Express</a>
-                                    <a href="#">Web</a>
-                                    <a href="#">Digital Expo</a>
-                                    <a href="#">Web Search</a>
-                                    <a href="#">Affiliate</a>
-                                    <a href="#">UCWeb</a>
-                                    <a href="#">Support</a>
-                                    <a href="#">Theme</a>
-                                    <a href="#">Best Queality</a>
-                                    <a href="#">Mobile</a>
-                                    <a href="#">24 Support</a>
-                                    <a href="#">Ali Express</a>
-                                    <a href="#">Web</a>
-                                    <a href="#">Laptop</a>
-                                    <a href="#">Web Search</a>
-                                    <a href="#">Affiliate</a>
-                                    <a href="#">Photoshop</a>
-                                    <a href="#">Support</a>
-                                    <a href="#">Theme</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Footer Middle -->
-        <!-- Start Copyright -->
-        <div class="copyright-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="copyright-inner ptb--25 text-center">
-                            <p class="mb--0">Copyright &copy; 2019.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Copyright -->
-    </footer>
-    <!-- End Footer Area -->
-
-
-
-
-
-
-
-
-
-
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModalaa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						模态框（Modal）标题
+					</h4>
+				</div>
+				<div class="modal-body">
+					在这里添加一些文本
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+					<button type="button" class="btn btn-primary">
+						提交更改
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<!-- 模态框（Modal）结束 -->
+	
+    
 
 
 
@@ -487,7 +280,8 @@
 
     <!-- JS
 ============================================ -->
-
+    <script src="MyStatic/js/jquery-1.11.3.js"></script>
+	<script src="MyStatic/js/MartQiu02.js"></script>
     <!-- Modernizer JS -->
     <script src="OneStatic/assets/js/vendor/modernizr.min.js"></script>
     <!-- jQuery JS -->
@@ -497,14 +291,24 @@
     <script src="OneStatic/assets/js/plugins/plugins.js"></script>
     <!-- Vendor & Plugins JS (Please remove the comment from below vendor.min.js & plugins.min.js for better website load performance and remove js files from avobe) -->
     <!--
-<script src="OneStatic/assets/js/vendor/vendor.min.js"></script>
-<script src="OneStatic/assets/js/plugins/plugins.min.js"></script>
--->
+	<script src="OneStatic/assets/js/vendor/vendor.min.js"></script>
+	<script src="OneStatic/assets/js/plugins/plugins.min.js"></script>
+	-->
 
     <!-- Main JS -->
     <script src="OneStatic/assets/js/main.js"></script>
 
-</body>
+	<script src="MyStatic/js/utils.js"></script>
 
+
+</body>
+	<script type="text/javascript">
+	function openMoTai(orderId){
+		console.log(orderId);
+		//弹出模态框,展示订单信息
+		$('#myModalaa').modal("show");
+
+	}
+	</script>
 </html>
 

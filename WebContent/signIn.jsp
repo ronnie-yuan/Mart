@@ -78,7 +78,7 @@
 							<p> <a href="signUp.jsp">Sign Up</a> | <a href="forgotPassword.jsp">Forgot Password</a></p>
 						</div>
 						<div class="form-group">
-							<input type="button" id="button1" value="Sign In" class="btn btn-primary"><span id="msg" style="font-size:12px;color:red">"${resultInfo.msg }</span>
+							<input type="button" id="button1" value="Sign In" class="btn btn-primary"><span id="msg" style="font-size:16px;color:red">${resultInfo.msg }</span>
 						</div>
 						<input type="hidden" name="actionName" value="userLogin"/>
 						

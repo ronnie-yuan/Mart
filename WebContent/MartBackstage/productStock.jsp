@@ -265,7 +265,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header bg-light">
-                           Product Stock Table
+                           User Table
                         </div>
 
                         <div class="card-body">

@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     
-
+	
     <!-- CSS
 	============================================ -->
 
@@ -50,12 +50,13 @@
     <div class="main-wrapper">
 
         <!-- Cart Page Start -->
+         <form method="post" action="MartIndexServlet" >
         <div class="cart_area pt--120 pb--80 bg-color pt_md--80 pt_sm--80" data-bg-color="#ffffff">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <form method="post" action="martCarServlet" enctype="multipart/form-data">
-                        	<input type="hidden" name="actionName" value=null>
+                       
+                        	<input type="hidden" name="actionName" value="insertOrder">
                             <!-- Cart Table -->
                             <div class="cart-table table-responsive mb--40">
                                 <table class="table">
@@ -67,100 +68,61 @@
                                             <th class="pro-price">价格</th>
                                             <th class="pro-quantity">数量</th>
                                             <th class="pro-subtotal">总计</th>
-                                            <th class="pro-remove">删除</th>
+                                            <th class="pro-remove">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         
-                                        
+                                        <!-- 你好 -->
                                       	<c:if test="${empty resultInfo.result }">
-                                      		<div><h2>暂未查询到购物车信息，请添加</h2></div>
+                                      		<div><h2>暂未查询到购物车信息，请添加商品</h2></div>
                                       	</c:if>
                                       	<c:forEach items="${resultInfo.result }" var="list">
+                                      		<!-- 商品tr头 -->
                                       		<tr id="tr_${list.proId }">
-                                      			<td><input type="checkbox" name="box"  value="${list.proPrice}" id="${list.proId}"/></td>
+                                      		
+                                      			<!-- 商品选择框 -->
+                                      			<td><input type="checkbox" name="box" <c:if test="${list.cchecked == 1 }">checked="checked"</c:if>  value="${list.proPrice}" id="p_${list.proId}" onclick="singleClick(${list.proId})"  /></td>
 	                                            <td class="pro-thumbnail"><a href="#"><img src="${list.proImg}" alt="Product"></a></td>
 	                                            <td class="pro-title"><a href="#">${list.proName}</a></td>
-	                                            <td class="pro-price"><span>￥${list.proPrice}</span></td>
+	                                            <td class="pro-price"><span>￥${list.proPrice}</span>
+	                                            	<!-- 商品价钱隐藏域 -->
+	                                            	<input type="hidden" id="hidden_${list.proId}" value="${list.proPrice}" />
+	                                            </td> 
 	                                            <td class="pro-quantity">
 
-	                                                 <input type="button"  id="minus" value="-" onclick="minusPro(${list.proId})"/>
+	                                             	 <input type="button"  id="minus${list.proId}" value="-" onclick="minusPro(${list.proId})" />
                                                 	<span id="m_${list.proId}" >${list.ccount}</span>
                                                 	<input type="button" id="add" value="+" onclick="addPro(${list.proId})"/>
-
-
+                                                	<!-- 商品数量隐藏域 -->
+                                                	<input type="hidden" id="num_${list.proId}" value="${list.ccount}"/>
 	                                            </td>
-	                                            <td class="pro-subtotal"><span>￥${list.proPrice*list.ccount}</span></td>
-	                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+	                                            <td class="pro-subtotal"><span id="total_${list.proId}">￥${list.proPrice*list.ccount}</span></td>
+	                                            <td class="pro-remove" id="delete_${list.proId}">
+	                                            	<button class="btn btn-danger" type="button" onclick="deletePro(${list.proId})">删除</button>
+	                 							
+	                                            </td>
                                         	</tr>
                                       	</c:forEach>
                                         
                                     </tbody>
                                 </table>
                             </div>
-                        </form>
+                        
 
-                        <div class="row">
-                            <div class="col-lg-6 col-12 mb--15">
-                                <!-- Calculate Shipping -->
-                                <div class="calculate-shipping">
-                                    <h4>Calculate Shipping</h4>
-                                    <form action="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-12 mb--25">
-                                                <select class="nice-select">
-                                                    <option>Bangladesh</option>
-                                                    <option>China</option>
-                                                    <option>country</option>
-                                                    <option>India</option>
-                                                    <option>Japan</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 col-12 mb--25">
-                                                <select class="nice-select">
-                                                    <option>Dhaka</option>
-                                                    <option>Barisal</option>
-                                                    <option>Khulna</option>
-                                                    <option>Comilla</option>
-                                                    <option>Chittagong</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 col-12 mb--25">
-                                                <input type="text" placeholder="Postcode / Zip">
-                                            </div>
-                                            <div class="col-md-6 col-12 mb--25">
-                                                <input type="submit" value="Estimate">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- Discount Coupon -->
-                                <div class="discount-coupon">
-                                    <h4>Discount Coupon Code</h4>
-                                    <form action="#">
-                                        <div class="row">
-                                            <div class="col-md-6 col-12 mb--25">
-                                                <input type="text" placeholder="Coupon Code">
-                                            </div>
-                                            <div class="col-md-6 col-12 mb--25">
-                                                <input type="submit" value="Apply Code">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                        <div class="row" >
 
                             <!-- Cart Summary -->
                             <div class="col-lg-6 col-12 mb--40 d-flex">
                                 <div class="cart-summary">
                                     <div class="cart-summary-wrap">
-                                        <h4>Cart Summary</h4>
-                                        <p>Sub Total <span>$1250.00</span></p>
-                                        <p>Shipping Cost <span>$00.00</span></p>
-                                        <h2>Grand Total <span>$1250.00</span></h2>
+                                    
+                                        <h4>已选择<span id="spanProNum">0</span>件商品</h4>
+                                        <h2>Grand Total ：￥<span id="Totalprice">0</span></h2>
+                                        
                                     </div>
                                     <div class="cart-summary-button">
-                                        <button class="checkout-btn">Checkout</button>
+                                        <button class="checkout-btn" id="cartCheckout" onclick="cartCheckout()">结算</button>
                                         <button class="update-btn">Update Cart</button>
                                     </div>
                                 </div>
@@ -170,8 +132,10 @@
                 </div>
             </div>
         </div>
+        </form>
         <!-- Cart Page End -->
     </div>
+    
 
     <!-- Quick View Modal -->
     <div class="quick-view-modal">
@@ -429,17 +393,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     <!-- JS
 ============================================ -->
 
@@ -462,13 +415,16 @@
 
 </body>
 <script type="text/javascript" src="MyStatic/js/jquery-1.11.3.js"></script>
+<script src="MyStatic/js/MartCart.js"></script>
 <script type="text/javascript">
 
 
 function minusPro(mp){
 	var r = $("#m_"+mp);
+	var t =$("#total_"+mp);
+	var p=$("#hidden_"+mp);
 	if(r.html()<=1){
-			$("#minus").prop("disabled",true);
+			$("#minus"+mp).prop("disabled",true);
 			return;
 		}
 	
@@ -488,7 +444,10 @@ function minusPro(mp){
  				var rr=r.html();
  				var Int=parseInt(rr);
  				var Int2=Int-1;
+ 				var price=p.val();
  				r.html(Int2);
+ 				
+ 				t.html(Int2*price);
  				
 			}
  		}
@@ -510,10 +469,14 @@ function addPro(mp){
  		success:function(result){
  			if (result== 1){
  				var s = $("#m_"+mp);
+ 				var t =$("#total_"+mp);
+ 				var p=$("#hidden_"+mp);
  				var ss=s.html();
  				var ss1=parseInt(ss);
  				var ss2=ss1+1;
+ 				var price=p.val();
  				s.html(ss2);
+ 				t.html(ss2*price);
  				
 			}
  		}
@@ -522,12 +485,41 @@ function addPro(mp){
 } 
 
 
+function deletePro(mp){
+
+	$.ajax({
+		type:"post",
+ 		url:"martCarServlet",
+ 		data:{
+ 			actionName:"deletePro",
+ 			proId:mp
+ 			
+ 		},
+ 		success:function(result){
+ 			if(result==1){
+ 				//删除成功
+ 				$("#tr_"+mp).remove();
+ 			}
+ 		}
+	})
+}
+
+
+
+
+
 //全选全不选 点击事件
 $("#all").click(function(){
 	
 	
 	//this.全选的复选框
 	var userids=this.checked;
+	//设定一个值作为全选全不选的状态 0不选,1位全选
+	var	allcheckedStatus=0;
+	if(userids==true){
+		allcheckedStatus=1;
+	}
+	
 	//获取name=box的复选框,遍历输出复选框
 	$("input[name=box]").each(function(){
 		this.checked=userids;
@@ -537,14 +529,30 @@ $("#all").click(function(){
 	var va =[];
 	var va1=0;
 	$("input[name=box]:checked").each(function(){
-		//将选中项的id循环加入集合
-		va.push($(this).attr("value"));
-		va1+= parseInt($(this).attr("value"));
+		va1++;
 	});
-	console.log(va);
-	console.log(va1);
 	
-	$("#Cmoney").text("总金额:￥"+va1);
+	$("#spanProNum").html(va1);
+	
+	
+	
+	//发送ajax 将购物车表中的所有数据状态变为选中
+	$.ajax({
+		type:"post",
+ 		url:"MartIndexServlet",
+ 		data:{
+ 			actionName:"allChecked",
+ 			Status:allcheckedStatus
+ 			
+ 		},
+ 		success:function(result){
+			if(result == null){
+				$("#Totalprice").html("0");
+				return;
+			}
+			$("#Totalprice").html(result);
+ 		}
+	})
 });
 
 </script>

@@ -212,7 +212,8 @@
 																		<th>订单总金额</th>
 																	</tr>
 																	<c:forEach items="${OrderList }" var="Order">
-																	<tr >
+																	<tr id="tr_${Order.orderId }"<input type="hidden" id="oId" value="${order.orderId}" />
+																	>
 																		<td >${Order.orderId }</td>
 																		<td>${Order.orderNumber }</td>
 																		<td>${Order.orderStatus }</td>

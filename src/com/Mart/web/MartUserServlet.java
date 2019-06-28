@@ -72,6 +72,10 @@ public class MartUserServlet extends HttpServlet {
 			System.out.println(actionName);
 			//进入个人中心
 			gouPersonalCenter(request,response);
+		}else if("deleteUserOrder".equals(actionName)){
+			
+			//删除个人订单
+			deleteUserOrder(request,response);
 		}
 		else {
 			
@@ -80,7 +84,19 @@ public class MartUserServlet extends HttpServlet {
 		}
 	}
 	
-	
+	/**
+	 * 进入个人中心
+	 * //删除个人订单
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void deleteUserOrder(HttpServletRequest request, HttpServletResponse response) {
+		// 调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
+		ResultInfo<User> resultInfo=service.deleteUserOrder(request);
+	}
+
+
 	/**
 	 * 进入个人中心
 	 * 查看个人订单
@@ -89,7 +105,7 @@ public class MartUserServlet extends HttpServlet {
 	 * @throws IOException 
 	 */
 	private void gouPersonalCenter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 调用service层的getCode方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
+		// 调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
 		ResultInfo<List<Order>> resultInfo=service.checkOrder(request);
 		System.out.println(resultInfo.getCode());
 		System.out.println(resultInfo.getResult());
@@ -111,7 +127,7 @@ public class MartUserServlet extends HttpServlet {
 	 * @param response
 	 */
 	private void updateUserPwd(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// 调用service层的getCode方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
+		// 调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
 		ResultInfo<User> resultInfo=service.updateUserPwd(request);
 		//设置相应编码格式
 		response.setContentType("text/html;charset=UTF-8");
@@ -136,7 +152,7 @@ public class MartUserServlet extends HttpServlet {
 	 * @param response
 	 */
 	private void checkPwd(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// 调用service层的getCode方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
+		// 调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
 		ResultInfo<User> resultInfo=service.checkPwd(request);
 		//将resultInfo对象转换成json格式的字符串，响应给ajax的回调函数
 		// 设置响应类型及编码
@@ -158,7 +174,7 @@ public class MartUserServlet extends HttpServlet {
 	 * @param response
 	 */
 	private void updateUserAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// 调用service层的getCode方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
+		// 调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
 		ResultInfo<User> resultInfo=service.updateUserAccount(request);
 		//设置相应编码格式
 		response.setContentType("text/html;charset=UTF-8");
@@ -186,7 +202,7 @@ public class MartUserServlet extends HttpServlet {
 	 */
 	private void StoragePwd(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
-		//调用service层的getCode方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
+		//调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
 		ResultInfo<User> resultInfo=service.StoragePwd(request);
 		//设置相应编码格式
 		response.setContentType("text/html;charset=UTF-8");
@@ -217,7 +233,7 @@ public class MartUserServlet extends HttpServlet {
 		// 接收手机信息参数
 		String phone=request.getParameter("uphone");
 		
-		//调用service层的getCode方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
+		//调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
 		ResultInfo<User> resultInfo=service.getCode(phone);
 		
 		//设置相应编码格式

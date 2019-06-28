@@ -343,6 +343,18 @@ public class MartUserService {
 		resultInfo.setResult(OrderList);
 		return resultInfo;
 	}
+	/**
+	 * 个人中心
+	 * 删除个人订单
+	 * @param request
+	 * @param response
+	 */
+	public ResultInfo<User> deleteUserOrder(HttpServletRequest request) {
+		//得到封装类的ResultInfo对象
+		ResultInfo<User> resultInfo=new ResultInfo();
+		//从session域中获取
+		return null;
+	}
 
 	
 	

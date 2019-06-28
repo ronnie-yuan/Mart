@@ -137,7 +137,23 @@ $("#but002").click(function(){
 })
 
 
-//查看订单
+//删除订单信息
+function deleteOrder(orderId){
+	//得到当前tr的id
+	var ids=$("#tr_${Order.orderId }").val();
+	console.log(ids);
+	//发送ajax
+	$.ajax({
+		type:"post",
+		url:"MartUserServlet",
+		date:{
+			actionName:"deleteUserOrder"
+		},
+		success:function(result){
+			
+		}
+	})
+}
 
 
 

@@ -142,7 +142,7 @@ public class MartUserDao {
 	@SuppressWarnings({ "rawtypes", "unchecked", "static-access" })
 	public List<Order> checkUserOrder(Integer userId) {
 		//查询当前登录用户所有的订单信息
-		String selectOrder="select o.orderId ,o.userId,o.orderNumber,o.orderStatus,o.orderPayment,o.orderSend,o.orderEnd,o.orderClose,o.orderCreate,o.orderUpdate,o.orderMoney,o.orderisIn from c_user u,c_order o where u.userId=o.userId  and u.userId=? ";
+		String selectOrder="select o.orderId ,o.userId,o.orderNumber,o.orderStatus,o.orderPayment,o.orderSend,o.orderEnd,o.orderClose,o.orderCreate,o.orderUpdate,o.orderMoney,o.orderisIn from c_user u,c_order o where u.userId=o.userId  and u.userId=? and o.orderisIn=1 ";
 		List<Object> params=new ArrayList();
 		params.add(userId);
 		

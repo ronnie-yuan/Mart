@@ -162,8 +162,7 @@ public class MartUserDao {
 			
 			//创建订单内商品信息对象集合
 			List<OrderProDetails> OrderProDetailsList=basedao.queryRows(selectOrderProDetails, Forparams, OrderProDetails.class);
-			System.out.println(OrderProDetailsList.get(0));
-			System.out.println(OrderProDetailsList.get(1));
+
 			OrderList.get(i).setList(OrderProDetailsList);
 			
 		}

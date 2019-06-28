@@ -10849,27 +10849,13 @@ textarea:-ms-input-placeholder {
 
 @media only screen and (max-width: 767px) {
   .cart-summary .cart-summary-button {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
+
   }
 }
 
 @media only screen and (max-width: 575px) {
   .cart-summary .cart-summary-button {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-            justify-content: flex-start;
+
   }
 }
 
@@ -10893,7 +10879,7 @@ textarea:-ms-input-placeholder {
 
 .cart-summary .cart-summary-button button.checkout-btn {
   font-weight: 700;
-  text-transform: uppercase;
+ 
   color: #fff;
   background-color: #ff5151;
   border-color: #ff5151;

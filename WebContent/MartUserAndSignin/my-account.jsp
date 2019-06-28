@@ -12,21 +12,16 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    
 
-    <!-- CSS
-	============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="OneStatic/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+   
     <link rel="stylesheet" href="OneStatic/assets/css/plugins/plugins.css">
 
-    <!-- Vendor & Plugins CSS (Please remove the comment from below vendor.min.css & plugins.min.css for better website load performance and remove css files from avobe) -->
-    <!--
-    <script src="OneStatic/assets/js/vendor/vendor.min.js"></script>
-    <script src="OneStatic/assets/js/plugins/plugins.min.js"></script>
-    -->
 
+	<script src="MyStatic/js/jquery-1.11.3.js"></script>
+	
     <!-- Main Style CSS (Please use minify version for better website load performance) -->
     <link rel="stylesheet" href="OneStatic/assets/css/style.css">
     <!--<link rel="stylesheet" href="OneStatic/assets/css/style.min.css">-->
@@ -64,7 +59,7 @@
                                                 account information </a>
                                         </h5>
                                     </div>
-                                    <div id="my-account-1" class="panel-collapse collapse show">
+                                    <div id="my-account-1" class="panel-collapse collapse ">
                                         <div class="panel-body">
                                             <div class="billing-information-wrapper">
                                                 <div class="account-info-wrapper">
@@ -129,6 +124,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h5 class="panel-title">
@@ -178,6 +175,10 @@
                                         </div>
                                     </div>
                                 </div>
+                               
+                               
+                               
+                               
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h5 class="panel-title">
@@ -212,8 +213,8 @@
 																		<th>订单总金额</th>
 																	</tr>
 																	<c:forEach items="${OrderList }" var="Order">
-																	<tr id="tr_${Order.orderId }"<input type="hidden" id="oId" value="${order.orderId}" />
-																	>
+																	<tr id="tr_${Order.orderId }"  >
+																		<input type="hidden" id="oId" value="${order.orderId}" />
 																		<td >${Order.orderId }</td>
 																		<td>${Order.orderNumber }</td>
 																		<td>${Order.orderStatus }</td>
@@ -221,8 +222,8 @@
 																		<td>${Order.orderUpdate }</td>
 																		<td>${Order.orderPayment }</td>
 																		<td>${Order.orderMoney }</td>
-																		<td><button class="btn btn-info"  id="c${Order.orderId}" onclick="openMoTai(${Order.orderId })"  >查看</button></td>
-                                                                		<td><button class="btn btn-info"  id="d${Order.orderId}" onclick="deleteOrder(${Order.orderId })" >删除</button></td>
+																		<td><button type="button" class="btn btn-info"  onclick="openMoTai(${Order.orderId })"  >查看</button></td>
+                                                                		<td><button type="button" class="btn btn-info"  onclick="deleteOrder(${Order.orderId })" >删除</button></td>
 																		
 																	</tr>
 																	</c:forEach>
@@ -245,48 +246,34 @@
             </div>
         </div>
         <!-- End My Account Area -->
+        	<!-- 模态框（Modal） -->
+		<div class="modal fade" data-backdrop="false" id="wodemotaikuang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title" id="myModalLabel1111">模态框（Modal）标题</h4>
+		            </div>
+		            <div class="modal-body">在这里添加一些文本</div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="button" class="btn btn-primary">提交更改</button>
+		            </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal -->
+		</div>
     </div>
-	<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModalaa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						模态框（Modal）标题
-					</h4>
-				</div>
-				<div class="modal-body">
-					在这里添加一些文本
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-					</button>
-					<button type="button" class="btn btn-primary">
-						提交更改
-					</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal -->
-	</div>
-	<!-- 模态框（Modal）结束 -->
-	
     
-
-
-
-
-
-    <!-- JS
-============================================ -->
-    <script src="MyStatic/js/jquery-1.11.3.js"></script>
-	<script src="MyStatic/js/MartQiu02.js"></script>
-    <!-- Modernizer JS -->
-    <script src="OneStatic/assets/js/vendor/modernizr.min.js"></script>
+    
+    
+	
+	
     <!-- jQuery JS -->
     <script src="OneStatic/assets/js/vendor/jquery.js"></script>
+    
+    <!-- Modernizer JS -->
+    <script src="OneStatic/assets/js/vendor/modernizr.min.js"></script>
+
     <!-- Bootstrap JS -->
     <script src="OneStatic/assets/js/vendor/bootstrap.min.js"></script>
     <script src="OneStatic/assets/js/plugins/plugins.js"></script>
@@ -300,16 +287,24 @@
     <script src="OneStatic/assets/js/main.js"></script>
 
 	<script src="MyStatic/js/utils.js"></script>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="MyStatic/js/MartQiu02.js"></script>
+	
+	
 
-
+	
+	
+	
+	
+	
 </body>
-	<script type="text/javascript">
-	function openMoTai(orderId){
-		console.log(orderId);
-		//弹出模态框,展示订单信息
-		$('#myModalaa').modal("show");
 
-	}
+	<script type="text/javascript">
+
+
 	</script>
+	
+	
 </html>
 

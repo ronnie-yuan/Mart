@@ -44,14 +44,3 @@ function singleClick(id){
 	})
 }
 
-function cartCheckout(){
-	var i=$("#spanProNum").html();
-	if(i == 0){
-
-		alert("亲爱的用户~请至少选择一个商品购买");
-		return;
-	}
-	
-	$("#CartFrom").submit();
-	
-}

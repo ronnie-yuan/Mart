@@ -814,7 +814,8 @@ public Map<Integer, Integer> substractOrderProductStock(Integer orderId) {
 			
 			resultSet3 = preparedStatement3.executeQuery();
 			
-			if(resultSet2.next()){
+			if(resultSet2.next() && resultSet3.next()){
+				
 				proStock = resultSet2.getInt("proStock") - resultSet3.getInt("soCount");
 				proId_proStock.put(proId, proStock);
 			}			

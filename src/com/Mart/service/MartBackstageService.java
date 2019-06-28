@@ -2,6 +2,7 @@ package com.Mart.service;
 
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Map;
 
 import com.Mart.Dao.MartBackstageDao;
 import com.Mart.po.Order;
@@ -401,9 +402,9 @@ public class MartBackstageService {
 			return resultInfo;
 		}
 		
-		List<Integer> proStock = martBackstageDao.substractOrderProductStock(orderId);
+		Map<Integer, Integer> proId_proStock = martBackstageDao.substractOrderProductStock(orderId);
 		
-		for(Integer i : proStock){
+		for(Integer i : proId_proStock.values()){
 			if(i == null){
 				resultInfo.setCode(0);
 				resultInfo.setMsg("商品库存不能为空!");

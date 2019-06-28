@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.Mart.Dao.BaseDao;
 import com.Mart.po.Order;
@@ -689,7 +691,7 @@ public class MartBackstageDao {
 	}
 
 /**
- * 设置
+ * 设置用户状态
  * @param userId
  * @param userStatus
  * @return
@@ -764,15 +766,18 @@ public int substractUserBalance(Integer orderId, Integer userId, Integer orderSt
  * @param orderId
  * @return
  */
-public List<Integer> substractOrderProductStock(Integer orderId) {
+public Map<Integer, Integer> substractOrderProductStock(Integer orderId) {
 	
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
+	PreparedStatement preparedStatement2 = null;
+	PreparedStatement preparedStatement3 = null;
 	ResultSet resultSet = null;	
+	ResultSet resultSet2 = null;
+	ResultSet resultSet3 = null;
 	Integer proId = null;
 	Integer proStock = null;
-	List<Integer> proIdList = new ArrayList<>();
-	List<Integer> proStockList = new ArrayList<>();
+	Map<Integer, Integer> proId_proStock = new HashMap<Integer, Integer>();
 	
 	try{
 		// 1、得到数据库连接
@@ -792,22 +797,38 @@ public List<Integer> substractOrderProductStock(Integer orderId) {
 		while(resultSet.next()){
 			
 			proId = resultSet.getInt("proId");
-			proIdList.add(proId);
+					
+			String sql2 = "select proStock from c_product where proId = ?";
 			
-		}
-		
-		for(Integer i : proIdList){
+			String sql3 = "select soCount from c_sorder where proId = ?";
 			
+			preparedStatement2 = connection.prepareStatement(sql2);
+			
+			preparedStatement2.setInt(1, proId);
+			
+			resultSet2 = preparedStatement2.executeQuery();
+			
+			preparedStatement3 = connection.prepareStatement(sql3);
+			
+			preparedStatement3.setInt(1, proId);
+			
+			resultSet3 = preparedStatement3.executeQuery();
+			
+			if(resultSet2.next()){
+				proStock = resultSet2.getInt("proStock") - resultSet3.getInt("soCount");
+				proId_proStock.put(proId, proStock);
+			}			
 		}
-		
+			
 	} catch(Exception e) {
 		e.printStackTrace();
 	} finally {
-		DBUtil.close(connection, preparedStatement, resultSet);
+		DBUtil.close(null, preparedStatement, resultSet);
+		DBUtil.close(connection, preparedStatement, resultSet2);
 	}
-	
-
-	
-	return null;
+	if(proId_proStock.isEmpty()){
+		proId_proStock.put(0, 0);
+	}	
+	return proId_proStock;
 	}	
 }

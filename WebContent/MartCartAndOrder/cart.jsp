@@ -122,8 +122,8 @@
                                         
                                     </div>
                                     <div class="cart-summary-button">
-                                        <button class="checkout-btn" id="cartCheckout" onclick="cartCheckout()">结算</button>
-                                        <button class="update-btn">Update Cart</button>
+                                        <button type="button" class="checkout-btn"  onclick="cartCheckout()">结算</button>
+                                        <button type="button" class="update-btn">Update Cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -417,7 +417,18 @@
 <script type="text/javascript" src="MyStatic/js/jquery-1.11.3.js"></script>
 <script src="MyStatic/js/MartCart.js"></script>
 <script type="text/javascript">
+function cartCheckout(){
+	var i=$("#spanProNum").html();
+	console.log(i);
+	if(i == 0){
 
+		alert("亲爱的用户~请至少选择一个商品购买");
+		return;
+	}
+	
+
+	
+}
 
 function minusPro(mp){
 	var r = $("#m_"+mp);

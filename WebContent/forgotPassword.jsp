@@ -63,6 +63,7 @@
 					<form action="MartUserServlet" id="loginForm3" class="fh5co-form animate-box" data-animate-effect="fadeInLeft">
 						<h2>Forgot Password</h2>
 						<input type="hidden" id="hidden1" name="actionName" value="getCode">
+						<input type="hidden" id="hidden2" name="actionName" value="sendMessage">
 						<div class="form-group">
 							<label for="num-phone" class="sr-only">Num-phone</label>
 							<input type="text" class="form-control" id="phone" name="uphone" placeholder="Num-phone(手机)" autocomplete="off">  
@@ -75,11 +76,13 @@
 							<p><a href="signIn.jsp">Sign In</a>&nbsp; or &nbsp;<a href="signUp.jsp">Sign Up</a></p>
 						</div>
 						<div class="form-group">
-							<input type="button" id="but1" value="get code" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="but2" value="Message sends" class="btn btn-primary">
+							<input type="button" id="but1" value="get code" class="btn btn-primary"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" id="but2" onclick="open" value="Message sends" class="btn btn-primary">
 						</div>
 						<div class="form-group">
-							<span style="font-size:16px;color:red" id="msg"></span>
+							<span style="font-size:16px;color:red" id="msg" ></span>
 						</div>
+						
+						
 					</form>
 					<!-- END Sign In Form -->
 
@@ -90,7 +93,38 @@
 				<div class="col-md-12 text-center"><p><small>&copy; Want to learn programming? Welcome to shsxt! <a href="https://www.shsxt.com/" target="_blank" title="上海尚学堂">SHSXT</a></small></p></div>
 			</div>
 		</div>
-	
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		    <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">×</span></button>
+		          <h4 class="modal-title" id="myModalLabel">请修改用户密码</h4>
+		        </div>
+		        <div class="modal-body"> 
+		          <div class="form-group">
+		            <input type="hidden" name="typeId"> 
+		            <input type="password" name="upwd1" class="form-control" id="upwd1" placeholder="请输入你的新密码">         	
+		          </div>
+		          <div class="form-group">
+		            <input type="hidden" name="typeId"> 
+		            <input type="password" name="upwd2" class="form-control" id="upwd2" placeholder="请再次输入你的密码">         	
+		          </div>      
+		        </div>
+		        <div class="modal-footer">
+		        	<span style="font-size: 16px;color:red" id="msg2"></span>
+		          <button type="button" id="btn_submit1" class="btn btn-default" data-dismiss="modal">
+		          <span class="glyphicon glyphicon-remove"></span>关闭修改</button>
+		          <button type="button" id="btn_submit" class="btn btn-primary">
+		          <span class="glyphicon glyphicon-floppy-disk"></span>提交修改</button>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		<!-- 模态框（Modal）结束 -->
+		
+
 	<!-- jQuery -->
 	<script src="OneStatic/statics/js/jquery.min.js"></script>
 	<!-- Bootstrap -->
@@ -104,7 +138,6 @@
 	<script src="OneStatic/statics/js/utils.js"></script>
 	<script src="OneStatic/statics/js/signIn.js"></script>
 	
-
 	</body>
 	<script src="MyStatic/js/MartQiu.js"></script>
 </html>

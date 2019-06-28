@@ -366,7 +366,7 @@
 		                                    <div class="product">
 		                                        <div class="inner">
 		                                            <div class="thumbnail">
-		                                                <a href="product-details.jsp">
+		                                                <a href="serial?proId=${list.proId}">
 		                                                    <img src="${list.getProImg() }" alt="Product Images">
 		                                                </a>
 		                                            </div>
@@ -374,7 +374,7 @@
 		                                                <div class="hover-inner">
 		                                                    <a title="Quick View" class="quickview" href="www.shsxt.com"><i class="fa fa-search"></i></a>
 		                                                    <a title="加入购物车" href="javascript:void(0);" onclick="addCart(${list.proId})" ><i class="fa fa-cart-plus"></i></a>
-		                                                    <a title="收藏该商品" href="#" onclick="addWishlist(${list.proId}"><i class="fa fa-heart-o"></i></a>
+		                                                    <a title="收藏该商品" href="javascript:void(0);" onclick="addWishlist(${list.proId})"><i class="fa fa-heart-o"></i></a>
 		                                                    
 		                                                </div>
 		                                            </div>

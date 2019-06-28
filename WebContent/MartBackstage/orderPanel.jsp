@@ -267,12 +267,12 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header bg-light">
-                           Order Panel
+                           User Table
                         </div>
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561608002891&di=812314035e77f1cf268bf897e797091d&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201308%2F02%2F20130802195948_kSx4H.thumb.700_0.jpeg); background-size:cover" >
+                                <table class="table" style="background-image:url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561546116274&di=4c074f44972df5a49634ef79d1430313&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fb13daed209e7ffdce54e606153b54e4bdf817cb1.jpg); background-size:cover;">
                                     <thead>
                                     <tr>
                                         <th>Order ID</th>
@@ -484,18 +484,16 @@
             </div>
             <div class="modal-body">
             <form id="editForm">
-						订单ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="orderId" id="orderIdMo" readonly="readonly" /><br />
-						用户ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userId" id="userIdMo" readonly="readonly"/><br />
-						订单号:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="orderNumber" id="orderNumberMo" readonly="readonly"/><br />
-						修改订单状态:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="orderStatus" id="orderStatusMo" /><br />
-						订单支付时间:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="orderPayment" id="orderPaymentMo" readonly="readonly"/><br />
-						订单发货时间:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="orderSend" id="orderSendMo" readonly="readonly" /><br />
-						订单交易完成时间:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="orderEnd" id="orderEndMo" readonly="readonly"/><br />
-						订单交易关闭时间:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="orderClose" id="orderCloseMo" readonly="readonly"/><br />
-						订单创建时间:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="orderCreate" id="orderCreateMo" readonly="readonly"/><br />
-						订单更新时间:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="orderUpdate" id="orderUpdateMo" /><br />
-						修改订单总金额:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="orderMoney" id="orderMoneyMo" /><br />
-						设定是否显示订单:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="orderisIn" id="orderisInMo" />
+						修改ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userId" id="userIdMo" readonly="readonly" /><br />
+						修改用户名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userName" id="userNameMo" /><br />
+						修改用户密码:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userPwd" id="userPwdMo" /><br />
+						修改用户性别:&nbsp;&nbsp;<input type="radio" name="userSex" id="userSexMo" checked="checked" value="2" />男
+						<input type="radio" name="userSex" id="userSexMo" value="1" />女<br />
+						修改用户邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userMail" id="userMailMo" /><br />
+						修改用户手机号:&nbsp;<input type="text" name="userMobile" id="userMobileMo" /><br />
+						修改用户头像&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="userHead" id="userHeadMo" readonly="readonly" /><br />
+						修改用户余额&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="userBalance" id="userBalanceMo" /><br />
+						修改用户状态&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" name="userStatus" id="userStatusMo" />
 					</form>
             </div>
             <div class="modal-footer">

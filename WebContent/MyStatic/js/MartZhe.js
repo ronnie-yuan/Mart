@@ -501,6 +501,89 @@ function sendOrderModifyReq(){
 	});	  
 		
 }
+/**
+ * 1.修改时判断当订单状态为 50的时候调用下面两个功能方法
+2. 减少对应用户的账号余额(订单总金额)
+3.减少对应订单内商品在商品表中的库存数
+ * @param oid
+ * @param uid
+ * @param status
+ */
+function sendOrderToUser(oid, uid, status, omy){
+	console.log(oid);
+	var msg = confirm("确认发货?");
+	var currentRow = $("#tr_"+oid);
+	
+	if(status == 50 && confirm(msg)==true){
+		substractUserBalance(oid, uid, status, omy);
+		substractOrderProductStock(oid, status);
+	} else {
+		alert("用户尚未支付, 不能发送订单");
+	}
+}
+/**
+ * 用户余额 - 商品总价
+ * @param oid
+ * @param uid
+ * @param status
+ */
+function substractUserBalance(oid, uid, status, omy){
+	var orderId = oid;
+	var userId = uid;
+	var orderStatus = status;
+	var orderMoney = omy;
+	
+	// 发送ajax请求
+	$.ajax({
+		type:"post",
+		url:"martBackstageServlet",
+		data:{
+			actionName:"substractUserBalance",
+			orderId:orderId,
+			userId:userId,
+			orderStatus:orderStatus,
+			orderMoney:orderMoney
+		},
+		dataType:"json", // 预期返回的数据的类型
+		success:function(result){
+			if (result.code == 1) {
+				alert("用户余额修改成功!");
+			} else {
+				alert("用户余额修改失败!");
+			}
+		}
+	});
+}
+/**
+ * 商品库存-订单中商品数量
+ * @param oid
+ * @param status
+ */
+function substractOrderProductStock(oid, status){
+	var orderId = oid;
+	var orderStatus = status;
+	
+	// 发送ajax请求
+	$.ajax({
+		type:"post",
+		url:"martBackstageServlet",
+		data:{
+			actionName:"substractOrderProductStock",
+			orderId:orderId,
+			orderStatus:orderStatus
+		},
+		dataType:"json", // 预期返回的数据的类型
+		success:function(result){
+			if (result.code == 1) {
+				alert("商品库存修改成功!");
+			} else {
+				alert("商品库存修改失败!");
+			}
+		}
+	});
+}
+
+
 /*
  * 随机获得n-m之间的整数
  */

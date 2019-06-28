@@ -459,7 +459,7 @@
 	                                        <td> <button type="button" id="btn" class="btn btn-success" onclick="showOrderModal(${order.orderId})">修改</button>
 	                                        &nbsp;&nbsp;
 	                                        <button type="button" id="btn" class="btn btn-warning" onclick="comfirmOrderDelete(${order.orderId})">删除</button>
-	                                        <button type="button" id="btn" class="btn btn-warning" onclick="comfirmOrderDelete(${order.orderId})">删除</button></td>
+	                                        <button type="button" id="btn" class="btn btn-primary" onclick="sendOrderToUser(${order.orderId}, ${order.userId }, ${order.orderStatus }, ${order.orderMoney })">发货</button></td>
 	                                    	</tr>
 	                                    	
                                     	</c:forEach>

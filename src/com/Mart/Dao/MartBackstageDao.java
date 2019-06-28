@@ -705,5 +705,109 @@ public class MartBackstageDao {
 		
 		int row = BaseDao.executeUpdate(sql, params);
 		return row;
+	}
+
+/**
+ * 用户余额-订单总额
+ * @param orderId
+ * @param userId
+ * @param orderStatus
+ * @param orderMoney
+ * @return
+ */
+public int substractUserBalance(Integer orderId, Integer userId, Integer orderStatus, Integer orderMoney) {
+	
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;	
+		Integer userBalance = null;
+		
+		try{
+			// 1、得到数据库连接
+						connection = DBUtil.getConnection();
+						// 2、准备SQL语句
+						String sql = "select userBalance from c_user where userId = ?";
+						
+						// 3、预编译
+						preparedStatement = connection.prepareStatement(sql);
+						
+						// 4、设置参数，下标从1开始
+						preparedStatement.setInt(1, userId);
+						
+						// 5、执行查询，返回结果集
+						resultSet = preparedStatement.executeQuery();
+						
+						while(resultSet.next()){
+							userBalance = resultSet.getInt("userBalance");
+						}
+						
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(connection, preparedStatement, resultSet);
+		}
+		
+		Integer newUserBalance = userBalance - orderMoney; 
+			
+		String updateSql = "update c_user set userBalance = ? where userId = ?";
+		
+		List<Object> params = new ArrayList<Object>();
+		params.add(newUserBalance);
+		params.add(userId);
+	
+		int row = BaseDao.executeUpdate(updateSql, params);
+		return row;
+	}
+
+/**
+ * 查找当前商品库存, 当前订单商品数量, 并将库存修改为当前库存-该订单商品数量
+ * @param orderId
+ * @return
+ */
+public List<Integer> substractOrderProductStock(Integer orderId) {
+	
+	Connection connection = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;	
+	Integer proId = null;
+	Integer proStock = null;
+	List<Integer> proIdList = new ArrayList<>();
+	List<Integer> proStockList = new ArrayList<>();
+	
+	try{
+		// 1、得到数据库连接
+		connection = DBUtil.getConnection();
+		// 2、准备SQL语句
+		String sql = "select proId from (select p.proId,p.proImg,p.proName,p.proBrand,p.proPrice,so.soCount,so.soId,o.orderId,o.userId from c_order o,c_sorder so,c_product p where so.orderId = o.orderId and so.proId=p.proId and o.orderId = ?) t ";
+		
+		// 3、预编译
+		preparedStatement = connection.prepareStatement(sql);
+		
+		// 4、设置参数，下标从1开始
+		preparedStatement.setInt(1, orderId);
+		
+		// 5、执行查询，返回结果集
+		resultSet = preparedStatement.executeQuery();
+		
+		while(resultSet.next()){
+			
+			proId = resultSet.getInt("proId");
+			proIdList.add(proId);
+			
+		}
+		
+		for(Integer i : proIdList){
+			
+		}
+		
+	} catch(Exception e) {
+		e.printStackTrace();
+	} finally {
+		DBUtil.close(connection, preparedStatement, resultSet);
+	}
+	
+
+	
+	return null;
 	}	
 }

@@ -86,11 +86,64 @@ public class MartBackstageServlet extends HttpServlet{
 			
 			// 删除订单(后台将订单状态设置为0)
 			setOrderStatus(request, response);
+		} else if("substractUserBalance".equals(actionName)){
+			
+			// 用户余额-订单总额
+			substractUserBalance(request, response);
+			
+		} else if("substractOrderProductStock".equals(actionName)){
+			
+			// 商品库存-订单商品数量
+			substractOrderProductStock(request, response);
+			
 		} else {
 		response.sendRedirect("MartBackstage/manipulate.jsp");
 		}
 	}
 	
+	/**
+	 * 商品库存-订单商品数量
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void substractOrderProductStock(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 获取信息
+		Integer orderId = Integer.parseInt(request.getParameter("orderId"));	
+		Integer orderStatus = Integer.parseInt(request.getParameter("orderStatus"));
+		
+		// 调用service层, 查找当前商品库存, 当前订单商品数量, 并将库存修改为当前库存-该订单商品数量
+		ResultInfo<Object> resultInfo = martBackstageService.substractOrderProductStock(orderId, orderStatus);
+		
+		System.out.println(resultInfo.getCode());
+		
+		// 将resultInfo对象 转换成JSON格式的字符串，响应给ajax的回调函数
+		JsonUtil.toJson(response, resultInfo);
+	}
+
+	/**
+	 * 用户余额-订单总额
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void substractUserBalance(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 获取信息
+		Integer orderId = Integer.parseInt(request.getParameter("orderId"));
+		Integer userId = Integer.parseInt(request.getParameter("userId"));
+		Integer orderStatus = Integer.parseInt(request.getParameter("orderStatus"));
+		Integer orderMoney = Integer.parseInt(request.getParameter("orderMoney"));
+		
+		// 调用service层, 通过商品ID修改order状态, 返回resultInfo对象
+		ResultInfo<Order> resultInfo = martBackstageService.substractUserBalance(orderId, userId, orderStatus, orderMoney);
+		
+		System.out.println(resultInfo.getCode());
+		
+		// 将resultInfo对象 转换成JSON格式的字符串，响应给ajax的回调函数
+		JsonUtil.toJson(response, resultInfo);
+		
+	}
+
 	private void setUserStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 获取信息
 		Integer userId = Integer.parseInt(request.getParameter("userId"));

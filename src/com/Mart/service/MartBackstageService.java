@@ -349,5 +349,75 @@ public class MartBackstageService {
 		
 		return resultInfo;
 	}
+	
+	/**
+	 * 用户余额-订单总额
+	 * @param orderId
+	 * @param userId
+	 * @param orderStatus
+	 * @param orderMoney
+	 * @return
+	 */
+	public ResultInfo<Order> substractUserBalance(Integer orderId, Integer userId, Integer orderStatus,
+			Integer orderMoney) {
+
+		ResultInfo<Order> resultInfo = new ResultInfo<>();
+		
+		// 后台订单状态判断
+		if(orderStatus != 50){
+			resultInfo.setCode(0);
+			resultInfo.setMsg("订单状态不正确！");
+			return resultInfo;
+		}
+		
+		int row = martBackstageDao.substractUserBalance(orderId, userId, orderStatus, orderMoney);
+		
+		// 判断受影响的行数是否大于0
+				if(row > 0){
+			  	resultInfo.setCode(1);
+				} else {
+					resultInfo.setCode(0);
+					resultInfo.setMsg("插入商品失败!");
+					return resultInfo;
+				} 
+		
+		return resultInfo;
+	}
+	
+	/**
+	 * 调用service层, 查找当前商品库存, 当前订单商品数量, 并将库存修改为当前库存-该订单商品数量
+	 * @param orderId
+	 * @param orderStatus
+	 * @return
+	 */
+	public ResultInfo<Object> substractOrderProductStock(Integer orderId, Integer orderStatus) {
+
+		ResultInfo<Object> resultInfo = new ResultInfo<>();
+		
+		// 后台订单状态判断
+		if(orderStatus != 50){
+			resultInfo.setCode(0);
+			resultInfo.setMsg("订单状态不正确！");
+			return resultInfo;
+		}
+		
+		List<Integer> proStock = martBackstageDao.substractOrderProductStock(orderId);
+		
+		for(Integer i : proStock){
+			if(i == null){
+				resultInfo.setCode(0);
+				resultInfo.setMsg("商品库存不能为空!");
+				return resultInfo;
+			} else if (i < 0){
+				resultInfo.setCode(0);
+				resultInfo.setMsg("商品已售完");
+				return resultInfo;
+			} else {
+				resultInfo.setCode(1);
+			}
+		}
+		
+		return resultInfo;
+	}
 }
 

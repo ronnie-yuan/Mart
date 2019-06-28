@@ -230,7 +230,7 @@
     <!-- jQuery JS -->
     <script src="OneStatic/assets/js/vendor/jquery.js"></script>
     <!-- Bootstrap JS -->
-    <script src="OneStatic/assets/js/vendor/bootstrap.min.js"></script>
+    
     <script src="OneStatic/assets/js/plugins/plugins.js"></script>
     <!-- Vendor & Plugins JS (Please remove the comment from below vendor.min.js & plugins.min.js for better website load performance and remove js files from avobe) -->
     <!--

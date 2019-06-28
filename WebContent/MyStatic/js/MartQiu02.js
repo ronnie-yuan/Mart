@@ -137,25 +137,18 @@ $("#but002").click(function(){
 })
 
 
-//删除订单信息
-function deleteOrder(orderId){
-	//得到当前tr的id
-	var ids=$("#tr_${Order.orderId }").val();
-	console.log(ids);
-	//发送ajax
-	$.ajax({
-		type:"post",
-		url:"MartUserServlet",
-		date:{
-			actionName:"deleteUserOrder"
-		},
-		success:function(result){
-			
-		}
-	})
+	//删除订单信息
+	function deleteOrder(orderId){
+		//得到当前tr的id
+		
+	}
+
+function openMoTai(orderId){
+
+	//弹出模态框,展示订单信息
+	$("#wodemotaikuang").modal("show");
+	
 }
-
-
 
 
 

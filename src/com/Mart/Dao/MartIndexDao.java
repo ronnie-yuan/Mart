@@ -223,7 +223,7 @@ public class MartIndexDao {
 		List<Object> params=new ArrayList();
 		params.add(userId);
 		BigDecimal  in=(BigDecimal) dao.findSingleValue(sql, params);
-		System.out.println("dao层中的BigDecimal的获取到的值:"+in);
+		
 		return in;
 	}
 	

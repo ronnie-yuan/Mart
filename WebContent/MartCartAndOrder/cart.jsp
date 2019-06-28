@@ -50,7 +50,7 @@
     <div class="main-wrapper">
 
         <!-- Cart Page Start -->
-         <form method="post" action="MartIndexServlet" >
+         <form method="post" action="MartIndexServlet" id="loginform">
         <div class="cart_area pt--120 pb--80 bg-color pt_md--80 pt_sm--80" data-bg-color="#ffffff">
             <div class="container">
                 <div class="row">
@@ -122,8 +122,8 @@
                                         
                                     </div>
                                     <div class="cart-summary-button">
-                                        <button type="button" class="checkout-btn"  onclick="cartCheckout()">结算</button>
-                                        <button type="button" class="update-btn">Update Cart</button>
+                                        <button type="button" class="checkout-btn"  onclick="cartaaaCheckout()">结算</button>
+                                        <button class="update-btn">Update Cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -417,8 +417,9 @@
 <script type="text/javascript" src="MyStatic/js/jquery-1.11.3.js"></script>
 <script src="MyStatic/js/MartCart.js"></script>
 <script type="text/javascript">
-function cartCheckout(){
+function cartaaaCheckout(){
 	var i=$("#spanProNum").html();
+	console.log($("#loginform"));
 	console.log(i);
 	if(i == 0){
 
@@ -426,7 +427,7 @@ function cartCheckout(){
 		return;
 	}
 	
-
+	$("#loginform").submit();
 	
 }
 

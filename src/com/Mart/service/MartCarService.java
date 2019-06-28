@@ -54,6 +54,11 @@ public class MartCarService {
 		return i;
 		
 	}
+
+	public int deletePro(Integer userId, Integer proId) {
+		int i=martcarDao.deletePro(userId,proId);
+		return i;
+	}
 	
 	
 

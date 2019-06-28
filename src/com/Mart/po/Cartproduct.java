@@ -8,8 +8,14 @@ public class Cartproduct {
 	private Integer proPrice;//商品单价
 	private Integer ccount;//该商品的数量
 	private Long proSum;//该件商品的总价
+	private Integer cchecked;//商品是否为选中状态
 	
-	
+	public Integer getCchecked() {
+		return cchecked;
+	}
+	public void setCchecked(Integer cChecked) {
+		this.cchecked = cChecked;
+	}
 	public Integer getProId() {
 		return proId;
 	}

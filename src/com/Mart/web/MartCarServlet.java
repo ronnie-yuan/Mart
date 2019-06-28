@@ -31,9 +31,10 @@ public class MartCarServlet extends HttpServlet {
 		String actionName=request.getParameter("actionName");
 		
 		//判断用户行为
-		if("delete".equals(actionName)){
+		if("deletePro".equals(actionName)){
 			
-			//查询商品列表
+			//删除购物车中的指定商品
+			deletePro(request,response);
 			
 			
 		}else if("minusPro".equals(actionName)){
@@ -43,8 +44,9 @@ public class MartCarServlet extends HttpServlet {
 			//将购物车商品数加一
 			plusPro(request,response);
 		}else{
+			
 			productList(request,response);
-			//判断用户行为
+			
 			
 		}
 		
@@ -53,6 +55,24 @@ public class MartCarServlet extends HttpServlet {
 		
 	}
 	
+	/**
+	 * 购物车中商品的删除
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void deletePro(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//1.接收参数
+		User user=(User)request.getSession().getAttribute("user");
+		Integer userId=user.getUserId();
+		String pId=request.getParameter("proId");
+		Integer proId=Integer.parseInt(pId);
+		int i=martcarservice.deletePro(userId,proId);
+		
+		PrintWriter out =response.getWriter();
+		out.write(i+"");
+	}
+
 	//给购物车中的指定商品做加一操作
 	private void plusPro(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//1.从session作用域中获取用户ID
@@ -87,18 +107,6 @@ public class MartCarServlet extends HttpServlet {
 		out.write(j+"");
 	}
 
-	/**
-	 * 删除用户购物车中的指定商品
-	 * @param request
-	 * @param response
-	 */
-	/*private void deleteList(HttpServletRequest request, HttpServletResponse response) {
-		//1.接收参数(proId)
-		String proId=request.getParameter("typeId");
-		//2.调用Service层，通过TypeId删除指定记录，返回resultInfo对象
-		ResultInfo<Cartproduct>resultInfo=martcarservice.deleteProduct();
-		
-	}*/
 
 	//查询当前登录用户购物车的商品集合
 	private void productList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

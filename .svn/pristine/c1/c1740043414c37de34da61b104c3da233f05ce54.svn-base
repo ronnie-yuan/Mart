@@ -160,7 +160,7 @@ function comfirmOrderDelete(oid){
 	
 	// 设置订单状态
 	var status = 1;
-
+	var test = 123;
 	
 	if(confirm(msg) == true){
 		deleteCurrentOrderRow(currentRow, oid, status);

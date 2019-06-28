@@ -99,76 +99,24 @@ function comfirmDelete(id){
 	console.log(id);
 	var msg = confirm("确认删除?");
 	var currentRow = $("#tr_"+id);
-	
-	var status = 1;
-	
 	console.log(currentRow, id);
-	
 	if (confirm(msg)==true){ 
-		
-		var r1 = rnd(1,6);
-		var r2 = rnd(1,6);
-		var r3 = rnd(1,6);
-		var r4 = rnd(1,6);
-		var r5 = rnd(1,6);
-		var r6 = rnd(1,6);
-		
-		if(r1 == 6 && r2 == 6 && r3 == 6 && r4 == 6 && r5 == 6 && r6 == 6){
-			 deleteCurrentRow(currentRow, id);
-		} else {
-			deleteCurrentRow2(currentRow, id, status);
-		}	
-	} else { 
-	    alert("删除失败"); 
+		 deleteCurrentRow(currentRow, id);
+		} else { 
+		return; 
 	} 
 }
-
 function comfirmProductDelete(productId){
 	console.log(productId);
 	var msg = confirm("确认删除?");
 	var currentRow = $("#tr_"+productId);
-	
-	// 设置订单状态
-	var status = 1;
-	
 	console.log(currentRow, productId);
 	if (confirm(msg)==true){ 
-		
-		var r1 = rnd(1,6);
-		var r2 = rnd(1,6);
-		var r3 = rnd(1,6);
-		var r4 = rnd(1,6);
-		var r5 = rnd(1,6);
-		var r6 = rnd(1,6);
-		
-		if(r1 == 6 && r2 == 6 && r3 == 6 && r4 == 6 && r5 == 6 && r6 == 6){
-			deleteCurrentProductRow(currentRow, productId);
-		} else {
-			deleteCurrentProductRow2(currentRow, productId, status);
-		}	 
-	} else { 
-		alert("删除失败"); 
+		 deleteCurrentProductRow(currentRow, productId);
+		}else{ 
+		return; 
 	} 
 }
-
-
-
-function comfirmOrderDelete(oid){
-	console.log(oid);
-	var msg = confirm("确认删除?");
-	var currentRow = $("#tr_"+oid);
-	
-	// 设置订单状态
-	var status = 1;
-
-	
-	if(confirm(msg) == true){
-		deleteCurrentOrderRow(currentRow, oid, status);
-	} else {
-		alert("删除失败");
-	}
-}
-
 /**
  * 删除当前行
  * @param currentRow
@@ -191,48 +139,16 @@ function deleteCurrentRow(currentRow, id){
 			  if (result.code == 1) {
 				  // 删除成功
 				  // 提示用户删除成功
-				  alert("灭霸响指, 你的数据真的丢失了哦, ROFL!");
+				  swal(result.msg,"","success");
 				  // 删除的DOM操作
 				  currentRow.remove();
 			  } else {
 				// 提示用户删除失败
-				  alert("删除失败");
+				  swal("删除失败！","","error");
 			  }
 		}
 	});
 }
-
-function deleteCurrentRow2(currentRow, id, status){
-	var userId = id;
-	var userStatus = status;
-	console.log(userId);
-	
-	$.ajax({
-		type:"post",
-		url:"martBackstageServlet",
-		data:{
-			actionName:"setUserStatus",
-			userId:userId,
-			userStatus:userStatus
-		},
-		dataType:"json", // 预期返回的数据的类型
-		success:function(result){
-			console.log(result);
-			  // 判断是否删除成功
-			  if (result.code == 1) {
-				  // 删除成功
-				  // 提示用户删除成功
-				  alert("删除成功");
-				  // 删除的DOM操作
-				  currentRow.remove();
-			  } else {
-				// 提示用户删除失败
-				  alert("删除失败");
-			  }
-		}
-	});
-}
-
 /**
  * 删除商品行
  * @param currentRow
@@ -256,75 +172,12 @@ function deleteCurrentProductRow(currentRow, productId){
 			  if (result.code == 1) {
 				  // 删除成功
 				  // 提示用户删除成功
-				  alert("灭霸响指, 你的数据真的丢失了哦, Kappa!");
+				  swal(result.msg,"","success");
 				  // 删除的DOM操作
 				  currentRow.remove();
 			  } else {
 				// 提示用户删除失败
-				  alert("删除失败");
-			  }
-		}
-	});
-}
-
-function deleteCurrentProductRow2(currentRow, productId, status){
-	var proId = productId;
-	var proStatus = status;
-	console.log(proId);
-	
-	$.ajax({
-		type:"post",
-		url:"martBackstageServlet",
-		data:{
-			actionName:"setProStatus",
-			proId:proId,
-			proStatus:proStatus
-		},
-		dataType:"json", // 预期返回的数据的类型
-		success:function(result){
-			console.log(result);
-			  // 判断是否删除成功
-			  if (result.code == 1) {
-				  // 删除成功
-				  // 提示用户删除成功
-				  alert("删除成功");
-				  // 删除的DOM操作
-				  currentRow.remove();
-			  } else {
-				// 提示用户删除失败
-				  alert("删除失败");
-			  }
-		}
-	});
-	
-}
-
-function deleteCurrentOrderRow(currentRow, oid, status){
-	var orderId = oid;
-	var orderStatus = status;
-	console.log(orderId);
-			
-	$.ajax({
-		type:"post",
-		url:"martBackstageServlet",
-		data:{
-			actionName:"setOrderStatus",
-			orderId:orderId,
-			orderStatus:orderStatus
-		},
-		dataType:"json", // 预期返回的数据的类型
-		success:function(result){
-			console.log(result);
-			  // 判断是否删除成功
-			  if (result.code == 1) {
-				  // 删除成功
-				  // 提示用户删除成功
-				  alert("删除成功");
-				  // 删除的DOM操作
-				  currentRow.remove();
-			  } else {
-				// 提示用户删除失败
-				  alert("删除失败");
+				  swal("删除失败！","","error");
 			  }
 		}
 	});
@@ -449,62 +302,5 @@ function sendProductModifyReq(){
 			  }  
 			  $("#myProModal").modal('hide');
 		}
-	});
-}
-/**
- * 发送修改订单表请求
- */
-function sendOrderModifyReq(){
-	var orderId = $("#orderIdMo").val();
-    var orderStatus = $("#orderStatusMo").val();
-	var orderUpdate = $("#orderUpdateMo").val();
-	var orderMoney = $("#orderMoneyMo").val();
-	var orderisIn = $("#orderisInMo").val();
-	
-	console.log(orderisIn);
-	
-	// 发送ajax请求
-	$.ajax({
-		type:"post",
-		url:"martBackstageServlet",
-		data:{
-			actionName:"addOrUpdateOrder",
-				orderId:orderId,
-				orderStatus:orderStatus,
-				orderUpdate:orderUpdate,
-				orderMoney:orderMoney,
-				orderisIn:orderisIn
-		},
-		dataType:"json", // 预期返回的数据的类型
-		success:function(result){
-			console.log(result);
-			// 判断是否修改成功
-			  if (result.code == 1) {
-				  
-				  $("#orderStatus_"+orderId).html(orderStatus);
-				  
-				  $("#orderUpdate_"+orderId).html(orderUpdate);
-				  
-				  $("#orderMoney_"+orderId).html(orderMoney);
-				  
-				  $("#orderisIn_"+orderId).html(orderisIn);
-				  
-				  // 提示用户修改成功
-				  alert("修改成功");
-				  
-			  } else {
-				// 提示用户删除失败
-				  alert("修改失败");
-			  }
-			  $("#myOrderModal").modal('hide');
-		  }
-	});	  
-		
-}
-/*
- * 随机获得n-m之间的整数
- */
-function rnd(n, m){
-    var random = Math.floor(Math.random()*(m-n+1)+n);
-    return random;
+	})
 }

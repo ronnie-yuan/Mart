@@ -86,7 +86,7 @@
                     <li class="nav-title">Navigation</li>
 
                     <li class="nav-item">
-                        <a href="index.jsp" class="nav-link">
+                        <a href="index.html" class="nav-link">
                             <i class="icon icon-speedometer"></i> Dashboard
                         </a>
                     </li>

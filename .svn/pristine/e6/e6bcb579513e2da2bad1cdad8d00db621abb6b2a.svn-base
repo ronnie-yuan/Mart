@@ -72,16 +72,6 @@ public class MartBackstageServlet extends HttpServlet{
 			
 			// 用户退出
 			userLogout(request, response);	
-			
-		} else if("setUserStatus".equals(actionName)){
-			
-			// 修改用户状态
-			setUserStatus(request, response);
-			
-		} else if("setProStatus".equals(actionName)){
-			// 删除商品(后台将商品状态设置为0)
-			setProStatus(request, response);
-			
 		} else if("setOrderStatus".equals(actionName)){
 			
 			// 删除订单(后台将订单状态设置为0)
@@ -89,40 +79,6 @@ public class MartBackstageServlet extends HttpServlet{
 		} else {
 		response.sendRedirect("MartBackstage/manipulate.jsp");
 		}
-	}
-	
-	private void setUserStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// 获取信息
-		Integer userId = Integer.parseInt(request.getParameter("userId"));
-		Integer userStatus = Integer.parseInt(request.getParameter("userStatus"));
-		
-		// 调用service层, 通过商品ID修改order状态, 返回resultInfo对象
-		ResultInfo<User> resultInfo = martBackstageService.setUserStatus(userId, userStatus);
-		
-		System.out.println(resultInfo.getCode());
-		
-		// 将resultInfo对象 转换成JSON格式的字符串，响应给ajax的回调函数
-		JsonUtil.toJson(response, resultInfo);
-	}
-
-	/**
-	 * 将商品状态设置为0
-	 * @param request
-	 * @param response
-	 * @throws IOException 
-	 */
-	private void setProStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// 获取信息
-		Integer proId = Integer.parseInt(request.getParameter("proId"));
-		Integer proStatus = Integer.parseInt(request.getParameter("proStatus"));
-		
-		// 调用service层, 通过商品ID修改order状态, 返回resultInfo对象
-		ResultInfo<Product> resultInfo = martBackstageService.setProductStatus(proId, proStatus);
-		
-		System.out.println(resultInfo.getCode());
-		
-		// 将resultInfo对象 转换成JSON格式的字符串，响应给ajax的回调函数
-		JsonUtil.toJson(response, resultInfo);
 	}
 	/**
 	 * 将订单状态设置为0
@@ -135,7 +91,7 @@ public class MartBackstageServlet extends HttpServlet{
 		Integer orderId = Integer.parseInt(request.getParameter("orderId"));
 		Integer orderStatus = Integer.parseInt(request.getParameter("orderStatus"));
 		
-		// 调用service层, 通过订单ID修改order状态, 返回resultInfo对象
+		// 调用service层, 通过订单ID修改指定信息, 返回resultInfo对象
 		ResultInfo<Order> resultInfo = martBackstageService.setOrderStatus(orderId, orderStatus);
 		
 		System.out.println(resultInfo.getCode());

@@ -86,7 +86,7 @@
                     <li class="nav-title">Navigation</li>
 
                     <li class="nav-item">
-                        <a href="index.jsp" class="nav-link">
+                        <a href="index.html" class="nav-link">
                             <i class="icon icon-speedometer"></i> Dashboard
                         </a>
                     </li>
@@ -458,7 +458,7 @@
 	                                        </td>
 	                                        <td> <button type="button" id="btn" class="btn btn-success" onclick="showOrderModal(${order.orderId})">修改</button>
 	                                        &nbsp;&nbsp;
-	                                        <button type="button" id="btn" class="btn btn-warning" onclick="comfirmOrderDelete(${order.orderId})">删除</button></td>
+	                                        <button type="button" id="btn" class="btn btn-warning" onclick="comfirmDelete(${order.orderId})">删除</button></td>
 	                                    	</tr>
 	                                    	
                                     	</c:forEach>

@@ -86,7 +86,7 @@
                     <li class="nav-title">Navigation</li>
 
                     <li class="nav-item">
-                        <a href="index.jsp" class="nav-link">
+                        <a href="index.html" class="nav-link">
                             <i class="icon icon-speedometer"></i> Dashboard
                         </a>
                     </li>
@@ -98,25 +98,25 @@
 
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="layouts-normal.html" class="nav-link">
                                     <i class="icon icon-target"></i> Normal
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="layouts-fixed-sidebar.html" class="nav-link">
                                     <i class="icon icon-target"></i> Fixed Sidebar
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="layouts-fixed-header.html" class="nav-link">
                                     <i class="icon icon-target"></i> Fixed Header
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="layouts-hidden-sidebar.html" class="nav-link">
                                     <i class="icon icon-target"></i> Hidden Sidebar
                                 </a>
                             </li>
@@ -130,43 +130,43 @@
 
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="alerts.html" class="nav-link">
                                     <i class="icon icon-energy"></i> Alerts
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="buttons.html" class="nav-link">
                                     <i class="icon icon-energy"></i> Buttons
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="cards.html" class="nav-link">
                                     <i class="icon icon-energy"></i> Cards
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="modals.html" class="nav-link">
                                     <i class="icon icon-energy"></i> Modals
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="tabs.html" class="nav-link">
                                     <i class="icon icon-energy"></i> Tabs
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="progress-bars.html" class="nav-link">
                                     <i class="icon icon-energy"></i> Progress Bars
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="MartCartAndOrder/cart.jsp" class="nav-link">
+                                <a href="widgets.html" class="nav-link">
                                     <i class="icon icon-energy"></i> Widgets
                                 </a>
                             </li>

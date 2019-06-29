@@ -62,8 +62,25 @@ $("#but001").click(function(){
  * 个人中心
  * 用户余额充值
  */
-$("#but0001").click(function(){
-	
+$("#but0033").click(function(){
+	var str=prompt("请输入您要充值的金额");
+	$.ajax({
+		type:"post",
+		url:"MartIndexServlet",
+		data:{
+			actionName:"addUserBl",
+			Money:str
+		},
+		success:function(result){
+			
+			if(result != 1){
+				alert("充值失败,请重试");
+				return;
+			}
+			alert("充值成功,可以前往购买商品");
+			
+		}
+	})
 })
 
 /**

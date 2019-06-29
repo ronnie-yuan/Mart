@@ -143,13 +143,13 @@ public class MartUserServlet extends HttpServlet {
 		//得到输出流
 		PrintWriter out =response.getWriter();
 		//获取短信验证码
-		String num="1212";
-		/*try {
+		String num=null;
+		try {
 			num=SmsDemo.sendSms(uphone);
 		} catch (ClientException e) {
 			e.printStackTrace();
-		}*/
-		System.out.println(num);
+		}
+
 		//输出数据,前台ajax接收
 		out.write(num);
 		out.close();
@@ -339,15 +339,15 @@ public class MartUserServlet extends HttpServlet {
 		}
 		//将用户对象存入session作用域中
 		request.getSession().setAttribute("user", resultInfo.getResult());
-		code1="1233";
+		
 		//查询成功,调用Mart.util中的方法得到验证信息
-//		try {
-//			//code=SmsDemo.sendSms(phone);
-//			
-//			
-//		} catch (ClientException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			code1=SmsDemo.sendSms(phone);
+			
+			
+		} catch (ClientException e) {
+			e.printStackTrace();
+		}
 		
 		//输出数据到ajax接收
 		out.write(code1);

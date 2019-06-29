@@ -114,7 +114,7 @@
                                                     </div>
                                                     <span style="font-size: 16px;color:red" id="msg3"></span>
                                                     <div class="billing-btn">
-                                                    	<input id="but002" type="button" value="Recharge(充值)" class="btn btn-info">
+                                                    	<input id="but0033" type="button" value="Recharge(充值)" class="btn btn-info">
                                                     	<input id="but001" type="button" value="Preserve(保存)" class="btn btn-info">
                                                     </div>                                                   
                                                 </div>

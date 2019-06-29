@@ -7,6 +7,7 @@ import java.util.List;
 import com.Mart.Dao.MartIndexDao;
 import com.Mart.po.BigType;
 import com.Mart.po.Cart;
+import com.Mart.po.Cartproduct;
 import com.Mart.po.Collect;
 import com.Mart.po.Order;
 import com.Mart.po.OrderProDetails;
@@ -161,6 +162,27 @@ public class MartIndexService {
 			rwo=1;
 		}
 		return rwo;
+	}
+	
+	//查询单个商品
+	public Product goushopDetails(Integer id) {
+		
+		Product product=dao.goushopDetails(id);
+		return product;
+	}
+	
+	//获取当前登录用户购物车中所有选中的商品数量
+	public List<Cartproduct> selectUserProCked(Integer userId) {
+		List< Cartproduct > selectUserProCkedList =dao.selectUserProCked(userId);
+		return selectUserProCkedList;
+	}
+
+	public int addUserBl(Integer money, Integer userId) {
+		int addTrueAndFalse=dao.addUserBl(money,userId);
+		if(addTrueAndFalse != 1){
+			return 0;
+		}
+		return 1;
 	}
 
 

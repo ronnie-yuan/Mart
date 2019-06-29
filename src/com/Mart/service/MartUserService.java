@@ -164,6 +164,9 @@ public class MartUserService {
 		}
 		return resultInfo;
 	}
+	
+	
+	
 	//忘记密码并修改密码
 	public ResultInfo<User> StoragePwd(HttpServletRequest request) throws IOException, ServletException{
 		//接收参数(密码)
@@ -207,6 +210,7 @@ public class MartUserService {
 		//吧字符窜类型的usex转化成integer
 		Integer inte=Integer.parseInt(usex);
 		String uemail=request.getParameter("uemail");
+		String uphone=request.getParameter("uphone");
 		//得到封装类的ResultInfo对象
 		ResultInfo<User> resultInfo=new ResultInfo<>();
 		//从session中获取用户对象,
@@ -223,9 +227,16 @@ public class MartUserService {
 			resultInfo.setMsg("性别不能为空!!!");
 			return resultInfo;
 		}
+		if(uphone==null ){
+			//为空,设置code为0,设置错误提示信息
+			resultInfo.setCode(0);
+			resultInfo.setMsg("手机不能为空!!!");
+			return resultInfo;
+		}
 		//更新user对象
 		user.setUserSex(inte);
 		user.setUserMail(uemail);
+		user.setUserMobile(uphone);
 		//调用Dao层的方法,更新数据库中的信息
 		int row= martuserdao.updateAccount(user);
 		//判断row是否>0,如果大于零则更新成功
@@ -316,7 +327,7 @@ public class MartUserService {
 	 */
 	public ResultInfo<List<Order>> checkOrder(HttpServletRequest request) {
 		//得到封装类的ResultInfo对象
-		ResultInfo<List<Order>> resultInfo=new ResultInfo();
+		ResultInfo<List<Order>> resultInfo=new ResultInfo<>();
 		
 		//得到session中的user对象
 		User user1=(User) request.getSession().getAttribute("user");
@@ -349,12 +360,82 @@ public class MartUserService {
 	 * @param request
 	 * @param response
 	 */
-	public ResultInfo<User> deleteUserOrder(HttpServletRequest request) {
-		//得到封装类的ResultInfo对象
-		ResultInfo<User> resultInfo=new ResultInfo();
-		//从session域中获取
-		return null;
+	public int deleteUserOrder(HttpServletRequest request) {
+		
+		//接收参数(orderId)
+		String orderId= request.getParameter("orderId");
+		Integer orderId1=Integer.parseInt(orderId);
+		//判断非空
+		if(StringUtil.isEmpty(orderId)){
+			//为空,设置code为0,设置错误提示信息
+			
+		}
+		//调用Dao层
+		int row =martuserdao.deleteUserOrder(orderId1);
+		
+		return row;
 	}
+	
+	/**
+	 * 用户手机号注册
+	 * @param request
+	 * @return
+	 */
+	public ResultInfo<User> mobileSignUp(HttpServletRequest request) {
+		//获取ResultInfo的对象
+		ResultInfo<User> resultInfo=new ResultInfo<>();
+		// 接收数据
+		String mobilephone=request.getParameter("mobilephone");
+		//系统自定义用户名,密码,id
+		String userName="n-"+mobilephone;
+		String userPwd="p-"+mobilephone;
+		
+		//new一个user对象(回显)
+		User user =new User();
+		user.setUserMobile(mobilephone);
+		resultInfo.setResult(user);
+		//判断非空
+		if(StringUtil.isEmpty(mobilephone)){
+			resultInfo.setCode(0);
+			resultInfo.setMsg("手机号不能为空!!");
+			return resultInfo;
+		}
+		//调用Dao层方法获取数据库信息
+		int row =martuserdao.insertUserMobile(mobilephone,userName,userPwd);
+		
+		//判断row是否非空
+		if(row==0){
+			//注册失败
+			resultInfo.setCode(0);
+			resultInfo.setMsg("用户注册失败!!");
+			return resultInfo;
+		}
+		//注册成功
+		resultInfo.setCode(1);
+		resultInfo.setMsg("注册成功!!");
+		
+		return resultInfo;
+	}
+	
+	//注册完再登录
+	public User huoquUser(HttpServletRequest request) {
+		// 获取数据
+		String mobilephone=request.getParameter("mobilephone");
+		
+		//通过到层查询数据库数据
+		User user=martuserdao.huoquUser(mobilephone);
+		//判断是否为空
+		if(user!=null){
+			//自动登录失败!!
+			return user;
+		}
+		//登录成功
+		return user;
+	}
+	
+	
+	
+	
 
 	
 	

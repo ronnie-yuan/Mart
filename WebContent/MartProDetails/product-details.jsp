@@ -58,36 +58,36 @@
                             <div class="product__details__container">
                                 <div class="tab_container big_img_container">
                                     <div class="big_img tab-pane fade show active" id="img1" role="tabpanel">
-                                        <img class="w-100" src="OneStatic/assets/images/product/1.jpg" alt="gomes restaurant">
+                                        <img class="w-100" src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </div>
                                     <div class="big_img tab-pane fade" id="img2" role="tabpanel">
-                                        <img class="w-100" src="OneStatic/assets/images/product/2.jpg" alt="gomes restaurant">
+                                        <img class="w-100" src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </div>
                                     <div class="big_img tab-pane fade" id="img3" role="tabpanel">
-                                        <img class="w-100" src="OneStatic/assets/images/product/3.jpg" alt="gomes restaurant">
+                                        <img class="w-100" src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </div>
                                     <div class="big_img tab-pane fade" id="img4" role="tabpanel">
-                                        <img class="w-100" src="OneStatic/assets/images/product/4.jpg" alt="gomes restaurant">
+                                        <img class="w-100" src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </div>
                                     <div class="big_img tab-pane fade" id="img5" role="tabpanel">
-                                        <img class="w-100" src="OneStatic/assets/images/product/5.jpg" alt="gomes restaurant">
+                                        <img class="w-100" src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </div>
                                 </div>
                                 <div class="sm_roduct_nav nav nav-tabs" role="tablist">
                                     <a class="active" id="img1-tab" data-toggle="tab" href="#img1" role="tab" aria-controls="img1" aria-selected="true">
-                                        <img src="OneStatic/assets/images/product/1.jpg" alt="gomes restaurant">
+                                        <img src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </a>
                                     <a id="nav-img2-tab" data-toggle="tab" href="#img2" role="tab" aria-controls="img2" aria-selected="false">
-                                        <img src="OneStatic/assets/images/product/2.jpg" alt="gomes restaurant">
+                                        <img src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </a>
                                     <a id="nav-img3-tab" data-toggle="tab" href="#img3" role="tab" aria-controls="img3" aria-selected="false">
-                                        <img src="OneStatic/assets/images/product/3.jpg" alt="gomes restaurant">
+                                        <img src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </a>
                                     <a id="nav-img4-tab" data-toggle="tab" href="#img4" role="tab" aria-controls="img4" aria-selected="false">
-                                        <img src="OneStatic/assets/images/product/4.jpg" alt="gomes restaurant">
+                                        <img src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </a>
                                     <a id="nav-img5-tab" data-toggle="tab" href="#img5" role="tab" aria-controls="img5" aria-selected="false">
-                                        <img src="OneStatic/assets/images/product/5.jpg" alt="gomes restaurant">
+                                        <img src="${shopDetails.proImg }" alt="gomes restaurant">
                                     </a>
                                 </div>
                             </div>
@@ -101,31 +101,25 @@
                                         <div class="product-badges">
                                             <span>Hot</span>
                                         </div>
-                                        <h4 class="heading heading-h4">Gold Plated Desk Lantern Lamp</h4>
+                                        <h4 class="heading heading-h4">${shopDetails.proName }</h4>
                                     </div>
 
                                     <div class="price">
-                                        <p class="theme-color">$112.00</p>
+                                        <p class="theme-color">$ ${shopDetails.proPrice }</p>
                                     </div>
 
                                     <div class="description">
-                                        <p class="bk_pra">On the other hand, we denounce with righteous indignation and
-                                            dislike men who are so beguiled and demoralized by the charms other hand, we
-                                            denounce with righteous indignation and dislike men who are so beguiled and
-                                            demoralized by the charms. </p>
+                                        <p class="bk_pra">${shopDetails.proDescription }</p>
                                     </div>
 
                                     <div class="quenty-container">
-                                        <div class="quenty-button">
-                                            <h6 class="heading heading-h6">QUANTITY</h6>
-                                            <input type="number" class="input-text qty text" step="1" min="1" name="quantity" value="1" title="Qty" size="4">
-                                        </div>
+                                        
 
                                         <div class="product-action">
-                                            <a class="addtocart" href="cart.jsp"><i
+                                            <a class="addtocart" href="javascript:void(0);" onclick="addCart(${shopDetails.proId})"><i
                                                     class="fa fa-cart-arrow-down"></i><span>Add
                                                     to cart</span></a>
-                                            <a class="wislist" href="cart.jsp"></a>
+                                            <a class="wislist" href="javascript:void(0);" onclick="addWishlist(${shopDetails.proId})"></a>
                                         </div>
                                     </div>
 
@@ -217,126 +211,7 @@
             </div>
         </div>
         <!-- End Product Review -->
-        <!-- Start Product Area -->
-        <div class="feature-product-area bg-color pb--120 pb_md--80 pb_sm--80" data-bg-color="#fff">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title text-center">
-                            <h2 class="title">Related Products</h2>
-                            <img src="OneStatic/assets/images/logo/shape.png" alt="Shape Images">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt--20">
-                    <!-- Start Single Product -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
-                        <div class="product">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="product-details.jsp">
-                                        <img src="OneStatic/assets/images/product/product-01.jpg" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-hover-action">
-                                    <div class="hover-inner">
-                                        <a title="Quick View" class="quickview" href="#"><i class="fa fa-search"></i></a>
-                                        <a href="cart.jsp"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="wishlist.jsp"><i class="fa fa-heart-o"></i></a>
-                                        <a href="compare.jsp"><i class="fa fa-repeat"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <h2><a href="product-details.jsp">Variable product</a></h2>
-                                <span class="prize">$200.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
 
-                    <!-- Start Single Product -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
-                        <div class="product">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="product-details.jsp">
-                                        <img src="OneStatic/assets/images/product/product-02.jpg" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-hover-action">
-                                    <div class="hover-inner">
-                                        <a title="Quick View" class="quickview" href="#"><i class="fa fa-search"></i></a>
-                                        <a href="cart.jsp"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="wishlist.jsp"><i class="fa fa-heart-o"></i></a>
-                                        <a href="compare.jsp"><i class="fa fa-repeat"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <h2><a href="product-details.jsp">Variable product</a></h2>
-                                <span class="prize">$190.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-
-                    <!-- Start Single Product -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
-                        <div class="product">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="product-details.jsp">
-                                        <img src="OneStatic/assets/images/product/product-03.jpg" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-hover-action">
-                                    <div class="hover-inner">
-                                        <a title="Quick View" class="quickview" href="#"><i class="fa fa-search"></i></a>
-                                        <a href="cart.jsp"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="wishlist.jsp"><i class="fa fa-heart-o"></i></a>
-                                        <a href="compare.jsp"><i class="fa fa-repeat"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <h2><a href="product-details.jsp">Open Front Cardigan</a></h2>
-                                <span class="prize">$180.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-
-                    <!-- Start Single Product -->
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
-                        <div class="product">
-                            <div class="inner">
-                                <div class="thumbnail">
-                                    <a href="product-details.jsp">
-                                        <img src="OneStatic/assets/images/product/product-04.jpg" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-hover-action">
-                                    <div class="hover-inner">
-                                        <a title="Quick View" class="quickview" href="#"><i class="fa fa-search"></i></a>
-                                        <a href="cart.jsp"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="wishlist.jsp"><i class="fa fa-heart-o"></i></a>
-                                        <a href="compare.jsp"><i class="fa fa-repeat"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <h2><a href="product-details.jsp">Sample Bundle Product</a></h2>
-                                <span class="prize">$170.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-
-                </div>
-            </div>
-        </div>
-        <!-- End Product Area -->
 
     </div>
 
@@ -622,10 +497,10 @@
 <script src="OneStatic/assets/js/vendor/vendor.min.js"></script>
 <script src="OneStatic/assets/js/plugins/plugins.min.js"></script>
 -->
-
+	<script src="MyStatic/js/jquery-1.11.3.js"></script>
     <!-- Main JS -->
     <script src="OneStatic/assets/js/main.js"></script>
-
+	<script src="MyStatic/js/MartLi.js"></script>
 </body>
 
 </html>

@@ -52,7 +52,8 @@
 					<ul class="menu">
 						<li ><a href="signUp.jsp"><h4>signUp</h4></a></li>&nbsp;&nbsp;
 						<li class="active"><a href="signIn.jsp"><h4>signIn</h4></a></li>&nbsp;&nbsp;
-						<li ><a href="forgotPassword.jsp"><h4>forgotPassword</h4></a></li>
+						<li ><a href="forgotPassword.jsp"><h4>forgotPassword</h4></a></li>&nbsp;&nbsp;
+						<li ><a href="Mobile_signUp.jsp"><h4>Mobile_signUp</h4></a></li>
 					</ul>
 				</div>
 			</div>
@@ -75,7 +76,7 @@
 							<label for="remember"><input type="checkbox" id="remember" value="1"> Remember Me</label>
 						</div>
 						<div class="form-group">
-							<p> <a href="signUp.jsp">Sign Up</a> | <a href="forgotPassword.jsp">Forgot Password</a></p>
+							<p> <a href="Mobile_signUp.jsp">Mobile_signUp</a> | <a href="signUp.jsp">Sign Up</a> | <a href="forgotPassword.jsp">Forgot Password</a></p>
 						</div>
 						<div class="form-group">
 							<input type="button" id="button1" value="Sign In" class="btn btn-primary"><span id="msg" style="font-size:16px;color:red">${resultInfo.msg }</span>

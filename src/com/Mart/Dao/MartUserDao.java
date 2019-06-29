@@ -94,11 +94,12 @@ public class MartUserDao {
 	//用户修改个人中心的信息,在数据库进行更新
 	public int updateAccount(User user) {
 		// 准备sql语句
-		String sql="update c_user set userSex=? ,userMail=? where userId=?";
+		String sql="update c_user set userSex=? ,userMail=? ,userMobile=? where userId=?";
 		//赋值
 		List<Object> list =new ArrayList<>();
 		list.add(user.getUserSex());
 		list.add(user.getUserMail());
+		list.add(user.getUserMobile());
 		list.add(user.getUserId());
 		//调用BaseDao的方法更新数据库
 		int row=basedao.executeUpdate(sql, list);
@@ -168,6 +169,56 @@ public class MartUserDao {
 		}
 		return OrderList;
 
+	}
+
+	
+	/**
+	 * 个人中心
+	 * 删除个人订单
+	 * @param request
+	 * @param response
+	 */
+	public int deleteUserOrder(Integer orderId1) {
+		// 准备sql
+		String sql="update c_order set orderisIn=0 where orderId=?";
+		//赋值
+		List<Object> list =new ArrayList<>();
+		list.add(orderId1);
+		//调用basedao修改数据库的值
+		int row=basedao.executeUpdate(sql, list);
+		return row;
+	}
+	
+	
+	/**
+	 * 手机注册添加手机号到数据库
+	 * @return
+	 */
+	public int insertUserMobile(String mobilephone,String userName,String userPwd) {
+		//创建sql
+		String sql="insert into c_user (userMobile,userName,userPwd) values(?,?,?)";
+		//赋值
+		List<Object> list =new ArrayList<>();
+		list.add(mobilephone);
+		list.add(userName);
+		list.add(userPwd);
+		//调用basedao增加数据库的值
+		int row=basedao.executeUpdate(sql, list);
+		return row;
+	}
+	
+	
+	
+	//
+	public User huoquUser(String mobilephone) {
+		// 准备sql
+		String sql="select* from c_user where userMobile=?";
+		//赋值
+		List<Object> list =new ArrayList<>();
+		list.add(mobilephone);
+		//调用basedao增加数据库的值
+		User user=(User) basedao.queryRow(sql, list, User.class);
+		return user;
 	}
 
 	

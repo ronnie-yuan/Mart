@@ -366,7 +366,7 @@
 		                                    <div class="product">
 		                                        <div class="inner">
 		                                            <div class="thumbnail">
-		                                                <a href="serial?proId=${list.proId}">
+		                                                <a href="MartIndexServlet?actionName=goushopDetails&proId=${list.proId}">
 		                                                    <img src="${list.getProImg() }" alt="Product Images">
 		                                                </a>
 		                                            </div>

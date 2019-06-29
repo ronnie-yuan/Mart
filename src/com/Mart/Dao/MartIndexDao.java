@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.Mart.po.BigType;
 import com.Mart.po.Cart;
+import com.Mart.po.Cartproduct;
 import com.Mart.po.Collect;
 import com.Mart.po.Order;
 import com.Mart.po.OrderProDetails;
@@ -249,6 +250,35 @@ public class MartIndexDao {
 		
 		
 		return li;
+	}
+	
+	//查询单个id
+	public Product goushopDetails(Integer id) {
+		//准备sql
+		String sql="select * from c_product where proId=?";
+		List<Object> params=new ArrayList();
+		params.add(id);
+		Product product=(Product) dao.queryRow(sql, params, Product.class);
+		return product;
+	}
+	
+	//查询当前登录用户的所有选中商品信息
+	public List<Cartproduct> selectUserProCked(Integer userId) {
+		String sql="select p.proId,proImg,  proName,  proPrice,  ccount ,cchecked  from  c_user, c_cart, c_product p where c_user.userId=c_cart.userId and c_cart.proId=p.proId and c_user.userId=? and c_cart.cchecked=1";
+		List<Object> params=new ArrayList();
+		params.add(userId);
+		List< Cartproduct > selectUserProCkedList=dao.queryRows(sql, params, Cartproduct.class);
+		return selectUserProCkedList;
+	}
+
+	public int addUserBl(Integer money, Integer userId2) {
+		String sql="update  c_user SET  userBalance = ? + userBalance where userId=?";
+		List<Object> params=new ArrayList();
+		params.add(money);
+		params.add(userId2);
+		int i= dao.executeUpdate(sql, params);
+		
+		return i;
 	}
 
 

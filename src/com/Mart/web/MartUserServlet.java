@@ -18,6 +18,7 @@ import com.Mart.po.User;
 import com.Mart.service.MartUserService;
 import com.Mart.util.JsonUtil;
 import com.Mart.util.SmsDemo;
+import com.Mart.util.StringUtil;
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.exceptions.ClientException;
 
@@ -31,7 +32,7 @@ public class MartUserServlet extends HttpServlet {
 		//接收参数 
 		String actionName=request.getParameter("actionName");
 		//对参数进行判断,进入相对应的操作
-		
+		System.out.println("1111111"+actionName);
 		if("userLogin".equals(actionName)){
 			
 			//用户登录
@@ -76,7 +77,16 @@ public class MartUserServlet extends HttpServlet {
 			
 			//删除个人订单
 			deleteUserOrder(request,response);
+		}else if("getCode1".equals(actionName)){
+			
+			//手机注册获取手机验证码
+			getCode1(request,response);
+		}else if("mobileSignUp".equals(actionName)){
+			
+			//手机注册提交
+			mobileSignUp(request,response);
 		}
+		
 		else {
 			
 			// 如果未传递actionName的值，拦截到登录页面
@@ -85,15 +95,91 @@ public class MartUserServlet extends HttpServlet {
 	}
 	
 	/**
+	 * //手机注册提交
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	private void mobileSignUp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
+		ResultInfo<User> resultInfo=service.mobileSignUp(request);
+		//判断
+		if(resultInfo.getCode()!=1){
+			//注册失败,把对象存request作用域中,跳转到注册页面
+			request.setAttribute("resultInfo11", resultInfo);
+			//跳转到注册页面
+			request.getRequestDispatcher("Mobile_signUp.jsp").forward(request, response);
+			return;
+		}
+		//自动登录
+		
+		User user=service.huoquUser(request);
+		if(user!=null){
+			//将user对象存到session域中
+			request.getSession().setAttribute("user", user);
+			
+			//注册成功将返回的resultInfo存到session域对象中
+			request.getSession().setAttribute("checkOrderCenter", resultInfo);
+			//登录成功首页MartIndexServlet
+			response.sendRedirect("MartIndexServlet?actionName=null");
+		}
+		
+		
+	}
+
+
+	/**
+	 * //手机注册获取手机验证码
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void getCode1(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//接收参数
+		String uphone=request.getParameter("uphone");
+		//设置相应编码格式
+		response.setContentType("text/html;charset=UTF-8");
+		//得到输出流
+		PrintWriter out =response.getWriter();
+		//获取短信验证码
+		String num="1212";
+		/*try {
+			num=SmsDemo.sendSms(uphone);
+		} catch (ClientException e) {
+			e.printStackTrace();
+		}*/
+		System.out.println(num);
+		//输出数据,前台ajax接收
+		out.write(num);
+		out.close();
+				
+				
+		
+	}
+
+	/**
 	 * 进入个人中心
 	 * //删除个人订单
 	 * @param request
 	 * @param response
 	 * @throws IOException 
 	 */
-	private void deleteUserOrder(HttpServletRequest request, HttpServletResponse response) {
-		// 调用service层的方法,返回查询结果（返回封装类ResultInfo：状态码code、提示信息msg、返回的对象
-		ResultInfo<User> resultInfo=service.deleteUserOrder(request);
+	private void deleteUserOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 调用service层的方法,返回查询结果（返回row)
+		int row=service.deleteUserOrder(request);
+		//设置相应编码格式
+		response.setContentType("text/html;charset=UTF-8");
+		//得到输出流
+		PrintWriter out =response.getWriter();
+		
+		if(row>0){
+			//修改成功
+			out.write(row+"");
+			out.close();
+		}
+		
+	
 	}
 
 
@@ -253,7 +339,6 @@ public class MartUserServlet extends HttpServlet {
 		}
 		//将用户对象存入session作用域中
 		request.getSession().setAttribute("user", resultInfo.getResult());
-		System.out.println(resultInfo.getResult()+"===========");
 		code1="1233";
 		//查询成功,调用Mart.util中的方法得到验证信息
 //		try {

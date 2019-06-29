@@ -66,6 +66,11 @@ public class LoginAccessFilter implements Filter {
 			chain.doFilter(request, response);
 			return;
 		}
+		if (url.contains("/Mobile_signUp.jsp")) {
+			// 放行
+			chain.doFilter(request, response);
+			return;
+		}
 		if (url.contains("/TextSignInServlet")) {
 			// 放行
 			chain.doFilter(request, response);

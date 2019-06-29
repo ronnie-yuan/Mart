@@ -65,12 +65,7 @@
                                 </ul>
                             </li>
                             <li><a href="IndexServlet?actionName=changePage&changePage=about.jsp">关于</a></li>
-                            <li class="lavel-1"><a href="IndexServlet?actionName=changePage&changePage=MartIndexAndSidebar/shop-left-sidebar.jsp">商品</a>
-                                <ul class="dropdown__menu">
-                                    <li><a href="IndexServlet?actionName=changePage&changePage=MartIndexAndSidebar/shop-left-sidebar.jsp"><span>左边选择框</span></a></li>                                   
-                                    <li><a href="IndexServlet?actionName=changePage&changePage=MartProDetails/product-details.jsp"><span>商品详情</span></a></li>
-                                </ul>
-                            </li>
+                            
                             <li class="lavel-1"><a href="#">个人</a>
                                 <ul class="dropdown__menu">
                                     <li><a href="martCarServlet?actionName=null"><span>购物车</span></a></li>
@@ -78,7 +73,9 @@
                                     <li><a href="IndexServlet?actionName=changePage&changePage=MartWishlist/wishlist.jsp"><span>心愿单</span></a></li>
                                     <li><a href="IndexServlet?actionName=changePage&changePage=compare.jsp"><span>商品对比</span></a></li>
                                     <li><a href="MartUserServlet?actionName=gouPersonalCenter"><span>个人中心</span></a></li>
+                                    <c:if test="${user.userStatus == 2 }">
                                     <li><a href="javascript:void(0);" onclick="gouhoutai()"><span>后台系统</span></a></li>
+                                    </c:if>
                                     <li><a href="javascript:void(0);" onclick="zhuxiao()"><span>登出</span></a></li>
                                 </ul>
                             </li>
@@ -91,9 +88,9 @@
                 <!-- Start Header Right -->
                 <div class="col-xl-1 col-lg-6 col-md-6 col-sm-6 col-6">
                     <div class="header-icon d-flex justify-content-end cart text-right">
-                        <a class="cart-trigger" href="#">
+                        <a class="cart-trigger" href="#" onclick="selectUserProCkedList()">
                             <i class="fa fa-shopping-cart"></i>
-                            <span class="cart-count">03</span>
+                            <span class="cart-count" id="proN">0</span>
                         </a>
                         <a class="hamburger-trigger d-block d-xl-none pl--15" href="#">
                             <i class="fa fa-bars"></i>
@@ -113,48 +110,21 @@
                 <i class="fa fa-times"></i>
             </a>
             <div class="cart-flyout__content">
-                <div class="cart-flyout__heading">购物车信息</div>
+                <div class="cart-flyout__heading">购物车选中商品</div>
                 <div class="widget_shopping_cart_content">
-                    <ul class="product_list_widget">
-                        <li>
-                            <div class="thumb">
-                                <img src="OneStatic/assets/images/product/sm-product-01.jpg" alt="product">
-                            </div>
-                            <div class="content">
-                                <h6><a href="IndexServlet?actionName=changePage&changePage=MartProDetails/product-details.jsp">Boys light blue jacket</a></h6>
-                                <div class="quntity">1 × $35.99</div>
-                                <button class="remove-btn">×</button>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="thumb">
-                                <img src="OneStatic/assets/images/product/sm-product-02.jpg" alt="product">
-                            </div>
-                            <div class="content">
-                                <h6><a href="IndexServlet?actionName=changePage&changePage=MartProDetails/product-details.jsp">Boys light blue jacket</a></h6>
-                                <div class="quntity">1 × $35.99</div>
-                                <button class="remove-btn">×</button>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="thumb">
-                                <img src="OneStatic/assets/images/product/sm-product-03.jpg" alt="product">
-                            </div>
-                            <div class="content">
-                                <h6><a href="IndexServlet?actionName=changePage&changePage=MartProDetails/product-details.jsp">Boys light blue jacket</a></h6>
-                                <div class="quntity">1 × $35.99</div>
-                                <button class="remove-btn">×</button>
-                            </div>
-                        </li>
+                    <ul class="product_list_widget" id="ulhtml">
+                       
+     
 
                     </ul>
                 </div>
-                <p class="minicart__total">Subtotal: <span class="price">164.97</span></p>
+                <p class="minicart__total">Subtotal: <span class="price" id="proCount">0</span></p>
                 <div class="cart__btn">
-                    <a href="martCarServlet?actionName=null">购物车</a>
-                    <a href="IndexServlet?actionName=changePage&changePage=MartCartAndOrder/checkout.jsp">Checkout</a>
+                    <a href="martCarServlet?actionName=null">前往购物车</a>
+                    <form method="post" action="MartIndexServlet" id="indexformGo">
+                    <input type="hidden" name="actionName" value="insertOrder">
+                    <a href="javascript:void(0);" onclick="cartaaaCheckoutIndex()">结算</a>
+                    </form>
                 </div>
             </div>
         </div>
@@ -183,30 +153,23 @@
                 </ul>
             </li>
             <li><a href="IndexServlet?actionName=changePage&changePage=about.jsp">关于</a></li>
-            <li class="has-dropdown"><a href="IndexServlet?actionName=changePage&changePage=shop.jsp">商品</a>
-                <ul class="sub-menu">
-                    <!-- <li><a href="shop.jsp"><span>右边选择框</span></a></li> -->
-                    <li><a href="IndexServlet?actionName=changePage&changePage=MartIndexAndSidebar/shop-left-sidebar.jsp"><span>左边选择框</span></a></li>
-                    <!-- <li><a href="shop-no-sidebar.jsp"><span>无选择框</span></a></li> -->
-                   	<li><a href="IndexServlet?actionName=changePage&changePage=MartProDetails/product-details.jsp"><span>商品详情</span></a></li>
-                </ul>
-            </li>
-            <li class="has-dropdown"><a href="#">个人</a>
-                <ul class="sub-menu">
-                    <li><a href="martCarServlet?actionName=null"><span>购物车</span></a></li>
-                    <li><a href="IndexServlet?actionName=changePage&changePage=MartCartAndOrder/checkout.jsp"><span>订单详情</span></a></li>
-                    <li><a href="IndexServlet?actionName=changePage&changePage=MartWishlist/wishlist.jsp"><span>心愿单</span></a></li>
-                    <li><a href="IndexServlet?actionName=changePage&changePage=compare.jsp"><span>商品对比</span></a></li>
-                    <li><a href="IndexServlet?actionName=changePage&changePage=MartUserAndSignin/my-account.jsp"><span>个人中心</span></a></li>
-                    <li><a href="signIn.jsp"><span>登录注册</span></a></li>
-                </ul>
-            </li>
-            <li class="has-dropdown"><a href="#">联系</a>
-                <ul class="sub-menu">
-                	<li><a href="IndexServlet?actionName=changePage&changePage=contact.jsp">联系我们</a></li>
-                </ul>
-            </li>
-        </ul>
+                            
+                            <li class="lavel-1"><a href="#">个人</a>
+                                <ul class="dropdown__menu">
+                                    <li><a href="martCarServlet?actionName=null"><span>购物车</span></a></li>
+                                    <li><a href="IndexServlet?actionName=changePage&changePage=MartCartAndOrder/checkout.jsp"><span>订单详情</span></a></li>
+                                    <li><a href="IndexServlet?actionName=changePage&changePage=MartWishlist/wishlist.jsp"><span>心愿单</span></a></li>
+                                    <li><a href="IndexServlet?actionName=changePage&changePage=compare.jsp"><span>商品对比</span></a></li>
+                                    <li><a href="MartUserServlet?actionName=gouPersonalCenter"><span>个人中心</span></a></li>
+                                    <c:if test="${user.userStatus == 2 }">
+                                    <li><a href="javascript:void(0);" onclick="gouhoutai()"><span>后台系统</span></a></li>
+                                    </c:if>
+                                    <li><a href="javascript:void(0);" onclick="zhuxiao()"><span>登出</span></a></li>
+                                </ul>
+                            </li>
+                            <li><a href="IndexServlet?actionName=changePage&changePage=contact.jsp">联系我们</a></li>
+
+                        </ul>
         <!-- End Main Menu -->
     </div>
     <!-- End Hamburger -->
@@ -237,7 +200,7 @@
 <script src="OneStatic/assets/js/vendor/vendor.min.js"></script>
 <script src="OneStatic/assets/js/plugins/plugins.min.js"></script>
 -->
-
+	 <script src="MyStatic/js/jquery-1.11.3.js"></script>
     <!-- Main JS -->
     <script src="OneStatic/assets/js/main.js"></script>
 	
@@ -258,6 +221,63 @@ function zhuxiao(){
 	if(res == true){
 		window.location.href="IndexServlet?actionName=zhuxiao";
 	}
+	
+}
+
+function selectUserProCkedList(){
+	$("#ulhtml").html("");
+	$.ajax({
+		type:"post",
+		url:"MartIndexServlet",
+		data:{
+			actionName:"selectUserProCkedList"
+		},
+		dataType:"json", // 预期服务器返回的数据库
+		success:function(result){
+			var count=0;
+			var proNum=0;
+			for(var i=0;i<result.length;i++){
+				var urht=$("#ulhtml").html();
+				$("#ulhtml").html(urht+"<li><div class='thumb'><img src="+result[i].proImg+" alt='product'></div> <div class='content'><h6><a href=MartIndexServlet?actionName=goushopDetails&proId="+result[i].proId+">"+result[i].proName+"</a></h6><div class='quntity'>"+result[i].ccount+" × "+result[i].proPrice+"</div><button class='remove-btn'>×</button></div></li>");
+				var paIn =parseInt(result[i].proPrice) * parseInt(result[i].ccount);
+				count += paIn;
+				proNum++;
+			}
+			$("#proCount").html(count);
+			$("#proN").html(proNum);
+			
+			
+		}
+	})
+}
+
+function cartaaaCheckoutIndex(){
+	var i=$("#proN").html();
+	if(i == 0){
+		alert("亲爱的用户~请至少选择一个商品购买");
+		return;
+	}
+	
+	$.ajax({
+		type:"post",
+		url:"MartIndexServlet",
+		data:{
+			actionName:"delectUserMoney"
+		},
+		success:function(result){
+			
+			if(parseInt(result) == 0){
+				alert("抱歉,亲爱的用户,你当前余额不足够支付目前订单,请前往个人中心进行充值.(应放在提交订单后在支付宝页面点击付款按钮判断)");
+				return;
+			}
+			console.log("通过");
+			$("#indexformGo").submit();
+			
+		}
+		
+		
+	})
+
 	
 }
 </script>

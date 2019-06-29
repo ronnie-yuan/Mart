@@ -52,7 +52,8 @@
 					<ul class="menu">
 						<li class="active"><a href="signUp.jsp"><h4>signUp</h4></a></li>&nbsp;&nbsp;
 						<li ><a href="signIn.jsp"><h4>signIn</h4></a></li>&nbsp;&nbsp;
-						<li ><a href="forgotPassword.jsp"><h4>forgotPassword</h4></a></li>
+						<li ><a href="forgotPassword.jsp"><h4>forgotPassword</h4></a></li>&nbsp;&nbsp;
+						<li ><a href="Mobile_signUp.jsp"><h4>Mobile_signUp</h4></a></li>
 					</ul>
 				</div>
 			</div>

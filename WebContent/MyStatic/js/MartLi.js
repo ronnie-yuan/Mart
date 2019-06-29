@@ -18,6 +18,8 @@ function addCart(id){
 	});
 }
 
+
+
 //商品分类页面
 function addWishlist(id){
 	console.log("添加心眼单");

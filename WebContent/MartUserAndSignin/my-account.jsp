@@ -93,21 +93,19 @@
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
                                                             <label>Telephone(电话)</label>
-                                                            <input type="text" id="uphone" name="uphone" readonly="readonly" value="${user.userMobile }"> 
+                                                            <input type="text" id="uphone" name="uphone"  value="${user.userMobile }"> 
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        <div class="billing-info">
-                                                            <label>Status(状态)</label>
-                                                            <input type="text" id="ustatus" name="ustatus" readonly="readonly" value="${user.userStatus }">
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="billing-info">
                                                             <label>Balance(用户金额)</label>
-                                                            <input type="text" id="ubalance" name="ubalance" readonly="readonly" value="${user.userBalance }">
-                                                        </div>
+                                                            <input type="text" id="ubalance" name="ubalance" readonly="readonly" value="${user.userBalance }">&nbsp;&nbsp;&nbsp;
+                                                            
+                                                        </div> 
                                                     </div>
+                                                    
+                                                    
                                                 </div>
                                                 <div class="billing-back-btn">
                                                     <div class="billing-back">
@@ -116,8 +114,8 @@
                                                     </div>
                                                     <span style="font-size: 16px;color:red" id="msg3"></span>
                                                     <div class="billing-btn">
+                                                    	<input id="but002" type="button" value="Recharge(充值)" class="btn btn-info">
                                                     	<input id="but001" type="button" value="Preserve(保存)" class="btn btn-info">
-                                                    	
                                                     </div>                                                   
                                                 </div>
                                             </div>
@@ -175,10 +173,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
-                               
-                               
-                               
+
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h5 class="panel-title">
@@ -224,9 +219,8 @@
 																		<td>${Order.orderMoney }</td>
 																		<td><button type="button" class="btn btn-info"  onclick="openMoTai(${Order.orderId })"  >查看</button></td>
                                                                 		<td><button type="button" class="btn btn-info"  onclick="deleteOrder(${Order.orderId })" >删除</button></td>
-																		
-																	</tr>
-																	</c:forEach>
+																		<td><button type="button" class="btn btn-info"  onclick="tuiKuang(${Order.orderId })"  >退款</button></td>
+																	</tr></c:forEach>
 																</table>	
                                                             </c:if>
                                                     	</div>
@@ -245,24 +239,59 @@
                 </div>
             </div>
         </div>
+        
+        
+        
+        
         <!-- End My Account Area -->
-        	<!-- 模态框（Modal） -->
-		<div class="modal fade" data-backdrop="false" id="wodemotaikuang" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
+        <!-- 模态框（Modal）开始 -->
+		
+		<c:forEach items="${OrderList }" var="Order">
+		
+		<div class="modal fade" data-backdrop="false" id="wodemotaikuang_${Order.orderId }" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		    <div class="modal-dialog modal-lg">
 		        <div class="modal-content">
 		            <div class="modal-header">
 		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                <h4 class="modal-title" id="myModalLabel1111">模态框（Modal）标题</h4>
+		                <h4 class="modal-title" id="myModalLabel1111">我的订单详情</h4>
 		            </div>
-		            <div class="modal-body">在这里添加一些文本</div>
-		            <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		                <button type="button" class="btn btn-primary">提交更改</button>
-		            </div>
-		        </div><!-- /.modal-content -->
-		    </div><!-- /.modal -->
+		            <div class="modal-body">
+		           		 <!-- 判断数据是否存在，不存在显示提示信息 -->
+                         <c:if test="${empty checkOrderCenter}">
+                              <h2>暂未查询到您的订单信息!!</h2>
+                         </c:if>
+                         <!-- 判断数据时候否存在，存在显示订单列表 -->
+                         <c:if test="${!empty checkOrderCenter }">
+	                          <table>	
+	                          	<tr>
+								<th>商品名称</th>
+								<th>商品品牌</th>
+								<th>商品价格</th>
+								<th>商品图片 </th>
+								</tr>
+									<c:forEach items="${Order.list }" var="OrderProDe">
+								<tr >
+									<td >${OrderProDe.proName }</td>
+									<td>${OrderProDe.proBrand }</td>
+									<td>${OrderProDe.proPrice }</td>
+									<td><a href="MartIndexServlet?actionName=goushopDetails&proId=${OrderProDe.proId}"><img src="${OrderProDe.proImg }"></a></td>																	</tr>
+								</tr>	
+									</c:forEach>
+								</table>	
+                         </c:if>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+					</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
 		</div>
-    </div>
+		
+		</c:forEach>
+		<!-- 模态框（Modal）结束 -->
+		
+		
     
     
     

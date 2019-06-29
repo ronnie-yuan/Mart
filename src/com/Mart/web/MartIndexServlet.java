@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.Mart.po.BigType;
 import com.Mart.po.Cart;
+import com.Mart.po.Cartproduct;
 import com.Mart.po.Order;
 import com.Mart.po.OrderProDetails;
 import com.Mart.po.Product;
@@ -25,6 +26,7 @@ import com.Mart.po.User;
 import com.Mart.po.vo.ResultInfo;
 import com.Mart.service.MartIndexService;
 import com.Mart.util.DBUtil;
+import com.Mart.util.JsonUtil;
 
 /**
  * Servlet implementation class MartIndexServlet
@@ -48,7 +50,7 @@ public class MartIndexServlet extends HttpServlet {
 			delectBigTypes(request,response);
 		}else if(actionName.equals("addCart")){
 			
-			//商品分类页面商品添加到购物车操作
+			//添加到购物车操作
 			addCart(request,response);
 		}else if(actionName.equals("insertOrder")){
 			
@@ -70,6 +72,18 @@ public class MartIndexServlet extends HttpServlet {
 			
 			//查询当前用户余额
 			delectUserMoney(request,response);
+		}else if(actionName.equals("goushopDetails")){
+			
+			//进入所选商品详情
+			goushopDetails(request,response);
+		}else if(actionName.equals("selectUserProCkedList")){
+			
+			//查询当前为选中状态的商品
+			selectUserProCkedList(request,response);
+		}else if(actionName.equals("addUserBl")){
+			
+			//增加用户金额
+			addUserBl(request,response);
 		}
 		else{
 			
@@ -80,6 +94,53 @@ public class MartIndexServlet extends HttpServlet {
 		
 	}
 	
+	//增加用户金额
+	private void addUserBl(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//获取到当前登录用户状态id
+		User user=(User) request.getSession().getAttribute("user");
+		Integer userId=user.getUserId();
+		
+		//获取当前用户要充值的金额
+		String Money = request.getParameter("Money");
+		Integer money = Integer.parseInt(Money);
+		
+		//传入service层
+		int addTrueAndFalse =martIndexService.addUserBl(money,userId);
+		
+		PrintWriter out=response.getWriter();
+		out.write(addTrueAndFalse+"");
+	}
+
+	private void selectUserProCkedList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//获取当前登录用户状态id
+		User user=(User) request.getSession().getAttribute("user");
+		Integer userId=user.getUserId();
+		//获取当前登录用户购物车中所有选中的商品数量
+		List< Cartproduct > selectUserProCkedList =martIndexService.selectUserProCked(userId);
+		
+		JsonUtil.toJson(response, selectUserProCkedList);
+		
+	}
+
+	//进入所选商品详情页面
+	private void goushopDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//获得当前进入的商品id
+		String id= request.getParameter("proId");
+		Integer proId=Integer.parseInt(id);
+		
+		//进入数据库查询数据
+		Product product=martIndexService.goushopDetails(proId);
+		
+		//将商品信息存入域对象中
+		request.setAttribute("shopDetails", product);
+		
+		//请求转发到商品详情页
+		request.setAttribute("changePage", "MartProDetails/product-details.jsp");
+		
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+
 	//查询当前用户余额
 	private void delectUserMoney(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
@@ -364,6 +425,9 @@ public class MartIndexServlet extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 			return;
 		}
+		
+		
+		
 		
 		
 		request.getSession().setAttribute("resultInfos", resultInfo);

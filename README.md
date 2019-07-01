@@ -10,3 +10,5 @@
 
 hierarchy: web-front-page ==>(By Ajax or form submit) Java Bean web ==> Java Bean service(For service Logic) ==> Java Bean Dao ==> BaseDao ==> DBUtil ==> JDBC work
 
+<br />STH Remains to be improved: Method Digest5 or security Hash Algorithum for password encoding as well as cooking encoding</br>
+

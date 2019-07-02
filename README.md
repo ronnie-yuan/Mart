@@ -6,7 +6,7 @@
 <br />Meta manipulating: git</br>
 <br />DataBase:mySQL</br>
 
-<br />Tech: Just simple jsp/servlet</br>
+<br />Tech: Just simple jsp/servlet, no frameworks</br>
 
 hierarchy: web-front-page ==>(By Ajax or form submit) Java Bean web ==> Java Bean service(For service Logic) ==> Java Bean Dao ==> BaseDao ==> DBUtil ==> JDBC work
 
